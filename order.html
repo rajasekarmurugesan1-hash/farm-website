@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Order Product</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+  font-family: 'Segoe UI', Arial;
+  margin: 0;
+  background: #f4f6f5;
+}
+.container {
+  border: 1px solid #eee;
+}
+/* CART ICON (RIGHT) */
+.cart-icon {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.container {
+  max-width: 900px;
+  margin: 30px auto;
+  background: white;
+  border-radius: 15px;
+  padding: 20px;
+  display: flex;
+  gap: 30px;
+  align-items: center;   /* KEY FIX */
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+}
+
+.cart-icon.animate {
+  transform: scale(1.2);
+  transition: 0.2s;
+}
+
+/*IMAGE*/
+.product-img {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.product-img img {
+  width: 100%;
+  max-width: 350px;
+  height: 260px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+}
+
+/* DETAILS */
+.details {
+  flex: 1;
+  text-align: left;
+}
+
+.price {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+/* QUANTITY */
+.qty-box {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin: 15px 0;
+}
+
+.qty-box button {
+  width: 40px;
+  height: 40px;
+  font-size: 18px;
+}
+
+/* BUTTONS */
+.btn {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.add { background: #16a34a; color: white; }
+.buy { background: #14532d; color: white; }
+
+/* QUALITY */
+.quality {
+  margin-top: 15px;
+  font-size: 14px;
+  color: #555;
+}
+.cart-icon {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: white;
+  padding: 8px 12px;
+  border-radius: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+}
+</style>
+</head>
+  <div class="cart-icon" onclick="goToCart()">
+    🛒 <span id="cartCount">0</span>
+  </div>
+  <h2 style="text-align:center;"> Order Product</h2>
+<body>
+
+<div class="container">
+
+
+
+  <!-- IMAGE -->
+  <div class="product-img">
+    <img id="productImage">
+  </div>
+
+  <!-- DETAILS -->
+  <div class="details">
+
+    <h2 id="productName"></h2>
+    <div class="price" id="productPrice"></div>
+
+    <!-- Quantity -->
+    <div class="qty-box"> 
+	<button onclick="changeQty(-1)">➖</button> 
+	<span id="qty">1</span> 
+	<button onclick="changeQty(1)">➕</button> 
+	</div> 
+	<p id="total"></p> 
+	<button class="btn add" onclick="addToCart()">Add to Cart</button> 
+	<button class="btn buy" onclick="buyNow()">Buy Now</button> 
+	<div class="quality"> 
+	🌿 100% Natural Feed <br> 
+	🚫 No Chemicals <br> 
+	🐓 Free Range Farming <br> 
+	🚚 Fresh from Farm 
+	</div>
+
+  </div>
+
+</div>
+
+<script>
+let product = localStorage.getItem("product");
+let price = Number(localStorage.getItem("price"));
+let qty = 1;
+
+/* Product images */
+let images = {
+  "Chicken Eggs": "images/farm.jpg",
+  "Duck Eggs": "images/farm.jpg",
+  "Duck": "images/farm2.jpg",
+  "Chicken": "images/farm2.jpg",
+  "Goat": "images/farm.jpg"
+};
+
+document.getElementById("productName").innerText = product;
+document.getElementById("productPrice").innerText = "Rs." + price;
+document.getElementById("productImage").src = images[product];
+
+function updateTotal() {
+  document.getElementById("total").innerText =
+    "Total: Rs." + (price * qty);
+}
+
+function changeQty(val) {
+  qty += val;
+  if (qty < 1) qty = 1;
+  document.getElementById("qty").innerText = qty;
+  updateTotal();
+}
+
+function addToCart() {
+
+  let product = localStorage.getItem("product");
+  let price = Number(localStorage.getItem("price"));
+  let qty = Number(document.getElementById("qty").innerText);
+
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  let existing = cart.find(item => item.product === product);
+
+  if (existing) {
+    existing.qty += qty;
+  } else {
+    cart.push({ product: product, price: price, qty: qty });
+  }
+
+  localStorage.setItem("cart", JSON.stringify(cart));
+
+  updateCartCount();   // update icon
+
+  console.log("Cart updated:", cart);  // DEBUG
+}
+
+function buyNow() {
+  addToCart();
+  window.location.href = "cart.html";
+}
+
+updateTotal();
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  updateCartCount();
+});
+</script>
+
+<script>
+function goToCart() {
+  window.location.href = "cart.html";
+}
+</script>
+
+<script>
+
+function updateCartCount() {
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  let count = cart.reduce((sum, item) => {
+    return sum + Number(item.qty || 0);
+  }, 0);
+
+  document.getElementById("cartCount").innerText = count;
+}
+
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+let product = localStorage.getItem("product");
+let price = Number(localStorage.getItem("price"));
+let qty = 1;
+
+/* fallback if opened directly */
+if (!product) {
+  product = "Chicken Eggs";
+  price = 70;
+}
+
+/* product images */
+let images = {
+  "Chicken Eggs": "images/farm.jpg",
+  "Duck Eggs": "images/farm2.jpg",
+  "Duck": "images/farm2.jpg",
+  "Chicken": "images/farm3.jpg",
+  "Goat": "images/farm.jpg"
+};
+
+/* SET VALUES */
+document.getElementById("productName").innerText = product;
+document.getElementById("productPrice").innerText = "Rs." + price;
+document.getElementById("productImage").src = images[product];
+
+/* UPDATE TOTAL */
+function updateTotal() {
+  document.getElementById("total").innerText =
+    "Total: Rs." + (price * qty);
+}
+
+/* BUTTONS MUST BE GLOBAL */
+window.changeQty = function(val) {
+  qty += val;
+  if (qty < 1) qty = 1;
+
+  document.getElementById("qty").innerText = qty;
+  updateTotal();
+};
+
+/* CART */
+window.addToCart = function() {
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  let existing = cart.find(item => item.product === product);
+
+  if (existing) {
+    existing.qty += qty;
+  } else {
+    cart.push({ product, price, qty });
+  }
+
+  localStorage.setItem("cart", JSON.stringify(cart));
+
+  updateCartCount();   // ✅ IMPORTANT
+  animateCart();       // optional animation
+};
+
+window.buyNow = function() {
+  addToCart();
+  window.location.href = "cart.html";
+};
+
+updateTotal();
+
+});
+
+</script>
+<script>
+function updateCartCount() {
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  if (!Array.isArray(cart) || cart.length === 0) {
+    document.getElementById("cartCount").innerText = 0;
+    return;
+  }
+
+  let count = cart.reduce((sum, item) => sum + Number(item.qty || 0), 0);
+
+  document.getElementById("cartCount").innerText = count;
+}
+</script>
+<script>
+function animateCart() {
+  let icon = document.querySelector(".cart-icon");
+  icon.classList.add("animate");
+
+  setTimeout(() => {
+    icon.classList.remove("animate");
+  }, 200);
+}
+</script>
+<script>
+document.querySelector(".cart-icon").style.background = "#d1fae5";
+
+setTimeout(() => {
+  document.querySelector(".cart-icon").style.background = "white";
+}, 300);
+</script>
+<script>
+window.addEventListener("storage", function () {
+  updateCartCount();
+});
+</script>
+<script>
+function removeItem(index) {
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  cart.splice(index, 1);
+
+  if (cart.length === 0) {
+    localStorage.removeItem("cart");   // ✅ important
+  } else {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }
+
+  loadCart();
+  updateCartCount();
+}
+
+function clearCart() {
+  localStorage.removeItem("cart");
+
+  loadCart();
+  updateCartCount();   // ✅ FIX
+}
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  updateCartCount();
+});
+</script>
+<script>
+function loadCart() {
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  let container = document.getElementById("cartItems");
+  container.innerHTML = "";
+
+  if (cart.length === 0) {
+    container.innerHTML = "<p>Your cart is empty</p>";
+    return;
+  }
+
+  cart.forEach((item, index) => {
+    container.innerHTML += `
+      <div>
+        <p>${item.product} - Rs.${item.price} x ${item.qty}</p>
+        <button onclick="removeItem(${index})">Remove</button>
+      </div>
+    `;
+  });
+}
+</script>
+</body>
+</html>

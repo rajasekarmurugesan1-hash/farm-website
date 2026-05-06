@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkout</title>
+
+<style>
+body {
+  font-family: 'Segoe UI', Arial;
+  background:#f4f6f5;
+  margin:0;
+}
+
+.header {
+  background: linear-gradient(90deg,#14532d,#166534);
+  color:white;
+  padding:15px;
+  text-align:center;
+}
+
+.container {
+  max-width:900px;
+  margin:30px auto;
+  display:flex;
+  gap:20px;
+}
+
+/* FORM */
+.form {
+  flex:2;
+  background:white;
+  padding:20px;
+  border-radius:12px;
+}
+
+input, textarea {
+  width:100%;
+  padding:10px;
+  margin:8px 0;
+  border-radius:6px;
+  border:1px solid #ccc;
+}
+
+/* SUMMARY */
+.summary {
+  flex:1;
+  background:white;
+  padding:20px;
+  border-radius:12px;
+  height:fit-content;
+}
+
+.total {
+  font-weight:bold;
+  margin-top:10px;
+}
+
+/* BUTTON */
+button {
+  width:100%;
+  padding:12px;
+  margin-top:10px;
+  border:none;
+  border-radius:8px;
+  background:#16a34a;
+  color:white;
+  cursor:pointer;
+}
+
+@media(max-width:768px){
+  .container { flex-direction:column; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+  <h2>Checkout</h2>
+</div>
+
+<div class="container">
+
+  <!-- FORM -->
+  <div class="form">
+    <h3>Customer Details</h3>
+
+    <input type="text" id="name" placeholder="Full Name" required>
+    <input type="tel" id="phone" placeholder="Phone Number" required>
+    <textarea id="address" placeholder="Delivery Address"></textarea>
+
+    <button onclick="placeOrder()">Place Order</button>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="summary">
+    <h3>Order Summary</h3>
+    <div id="summary"></div>
+    <div id="total" class="total"></div>
+  </div>
+
+</div>
+
+<script>
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+/* LOAD SUMMARY */
+function loadSummary() {
+  let summary = document.getElementById("summary");
+  let totalEl = document.getElementById("total");
+
+  if (cart.length === 0) {
+    summary.innerHTML = "Cart is empty";
+    return;
+  }
+
+  let total = 0;
+  summary.innerHTML = "";
+
+  cart.forEach(item => {
+    let itemTotal = item.price * item.qty;
+    total += itemTotal;
+
+    summary.innerHTML += `
+      <p>${item.product} - ${item.qty} x Rs.${item.price}</p>
+    `;
+  });
+
+  totalEl.innerText = "Total: Rs." + total;
+}
+
+/* PLACE ORDER */
+function placeOrder() {
+  let name = document.getElementById("name").value;
+  let phone = document.getElementById("phone").value;
+  let address = document.getElementById("address").value;
+
+  if (!name || !phone) {
+    alert("Please fill required fields");
+    return;
+  }
+
+  let orders = JSON.parse(localStorage.getItem("orders")) || [];
+
+  let newOrder = {
+    id: Date.now(),
+    name,
+    phone,
+    address,
+    items: cart,
+    date: new Date().toLocaleString()
+  };
+
+  orders.push(newOrder);
+
+  localStorage.setItem("orders", JSON.stringify(orders));
+  localStorage.removeItem("cart");
+
+  alert("Order placed successfully!");
+
+  window.location.href = "orders.html";
+}
+
+loadSummary();
+</script>
+
+</body>
+</html>

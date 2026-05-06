@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MMM Farm</title>
+
+<style>
+/* RESET DEFAULT MARGINS */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* REMOVE ALL TOP GAP AFTER HEADER */
+header + section {
+  padding-top: 10px !important;
+  margin-top: 0 !important;
+}
+
+/* REMOVE EXTRA SPACE FROM FIRST BOX */
+section:first-of-type .box {
+  margin-top: 0 !important;
+}
+
+/* REMOVE DEFAULT HEADING SPACE */
+h2 {
+  margin-top: 0 !important;
+}
+
+/* OPTIONAL: tighten section spacing globally */
+section {
+  padding: 20px 20px;
+}
+/* BODY */
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: #f5f7f6;
+  color: #222;
+  line-height: 1.5;
+}
+
+/* HEADER */
+header {
+  position: relative;
+  padding: 18px 60px;
+  background: linear-gradient(90deg, #14532d, #166534);
+  color: white;
+  text-align: center;
+}
+
+/* TITLE */
+.title {
+  font-size: 24px;
+  margin-bottom: 4px;
+}
+
+.subtitle {
+  font-size: 13px;
+  opacity: 0.9;
+}
+
+#sideMenu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0;
+  background: #14532d;
+  overflow-x: hidden;
+  transition: 0.3s;
+  z-index: 1000;
+  padding-top: 60px;
+}
+
+/* Menu links */
+#sideMenu a {
+  display: block;
+  padding: 12px 20px;
+  color: white;
+  text-decoration: none;
+}
+
+#sideMenu a:hover {
+  background: #166534;
+}
+
+/* SECTIONS */
+section {
+  padding: 30px 20px;   /* uniform spacing */
+}
+
+/* FIRST SECTION FIX */
+section:first-of-type {
+  padding-top: 20px;
+}
+
+/* SECTION HEADINGS */
+h2 {
+  margin-bottom: 15px;
+  color: #14532d;
+  text-align: center;
+}
+
+/* BOX CONTAINER */
+.box {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+/* ADD SPACE BETWEEN BOXES */
+section + section {
+  margin-top: 10px;
+}
+
+.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 15px;   /* balanced gap */
+}
+
+.card {
+  padding: 15px;
+  border-radius: 10px;
+  background: #fafafa;
+  border: 1px solid #eee;
+  text-align: center;
+}
+
+.card h3 {
+  margin-bottom: 8px;
+}
+
+.card p {
+  margin-bottom: 10px;
+}
+header {
+  position: relative;
+  background: linear-gradient(90deg, #14532d, #166534);
+  color: white;
+  padding: 20px 60px;  /* extra space for icons */
+  text-align: center;
+}
+
+/* MENU ICON (LEFT) */
+.menu-icon {
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  font-size: 26px;
+  cursor: pointer;
+}
+
+/* CART ICON (RIGHT) */
+.cart-icon {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+/* TITLE */
+.title {
+  margin: 0;
+  font-size: 26px;
+}
+
+.subtitle {
+  margin: 5px 0 0;
+  font-size: 14px;
+}
+
+header {
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+/* SECTION SPACING */
+section {
+  padding: 50px 20px;
+}
+
+/* CARD CONTAINER */
+.box {
+  max-width: 1000px;
+  margin: auto;
+  background: white;
+  border-radius: 15px;
+  padding: 25px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+}
+
+/* HEADINGS */
+h2 {
+  margin-bottom: 20px;
+  color: #14532d;
+}
+
+/* PRODUCTS GRID */
+.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background: #fafafa;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  transition: 0.3s;
+  border: 1px solid #eee;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+th, td {
+  padding: 10px;
+  text-align: center;
+}
+
+th {
+  background: #14532d;
+  color: white;
+}
+
+.slider {
+  margin-top: 10px;
+}
+
+.slide img,
+.slide video {
+  height: 240px;
+  border-radius: 10px;
+}
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.gallery img {
+  height: 150px;
+  border-radius: 10px;
+}
+iframe {
+  margin-top: 10px;
+  height: 300px;
+  border-radius: 10px;
+}
+button {
+  margin-top: 8px;
+  padding: 8px 12px;
+}
+/* Mobile optimization*/
+@media (max-width: 768px) {
+
+  section {
+    padding: 20px 12px;
+  }
+
+  .box {
+    padding: 15px;
+  }
+
+  .title {
+    font-size: 20px;
+  }
+
+  .subtitle {
+    font-size: 12px;
+  }
+
+  .slide img,
+  .slide video {
+    height: 200px;
+  }
+}
+
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4);
+  display: none;
+  z-index: 999;
+}
+
+/* BUTTONS */
+button {
+  background: #16a34a;
+  color: white;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: 0.2s;
+}
+
+button:hover {
+  background: #15803d;
+}
+
+/* SLIDER */
+.slider {
+  width: 100%;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.slides {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+  min-width: 100%;
+}
+
+.slide img,
+.slide video {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+/* Desktop */
+.slide img,
+.slide video {
+  height: 320px;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .slide img,
+  .slide video {
+    height: 220px;
+  }
+}
+
+/* DOTS */
+.dots {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.dots span {
+  width: 10px;
+  height: 10px;
+  background: #ccc;
+  display: inline-block;
+  margin: 5px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.dots .active {
+  background: #16a34a;
+}
+
+
+/* TABLE */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+th {
+  background: #14532d;
+  color: white;
+}
+
+th, td {
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+}
+
+/* MAP */
+iframe {
+  width: 100%;
+  height: 350px;
+  border: none;
+  border-radius: 12px;
+}
+
+/* FOOTER */
+footer {
+  background: #14532d;
+  color: white;
+  text-align: center;
+  padding: 15px;
+}
+
+/* CART ICON */
+.cart-icon {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+
+
+html {
+  scroll-behavior: smooth;
+}
+</style>
+</head>
+
+<script>
+function openMenu() {
+  document.getElementById("sideMenu").style.width = "250px";
+}
+
+function closeMenu() {
+  document.getElementById("sideMenu").style.width = "0";
+}
+
+</script>
+
+
+<body>
+<div id="overlay" onclick="closeMenu()"></div>
+<header>
+  <span class="menu-icon" onclick="openMenu()">☰</span>
+
+  <h1 class="title">MMM Green Valley Farm</h1>
+  <p class="subtitle">Fresh Veggies • Fresh Eggs • Ducks • Chicken • Goats</p>
+
+  <div class="cart-icon" onclick="goToCart()">
+    🛒 <span id="cartCount">0</span>
+  </div>
+</header>
+
+<div id="overlay" onclick="closeMenu()" style="
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.4);
+  display:none;
+  z-index:999;
+"></div>
+
+<!-- SIDE MENU -->
+<div id="sideMenu">
+  <a href="javascript:void(0)" onclick="closeMenu()">✖</a>
+  <a href="#about">About</a>
+  <a href="#products">Products</a>
+  
+
+  <div style="padding-left:20px; color:white;">
+	<a href="product.html?item=Chicken Eggs">• Chicken Eggs</a>
+	<a href="product.html?item=Duck Eggs">• Duck Eggs</a>
+	<a href="product.html?item=Duck">• Duck</a>
+	<a href="product.html?item=Chicken">• Chicken</a>
+	<a href="product.html?item=Goat">• Goat</a>
+  </div>
+  <a href="#contact">Contact</a>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="box">
+    <h2>About Our Farm</h2>
+    <p>We raise chickens, ducks, and goats in a clean and natural environment.A clean, organic livestock farm that raises chickens, ducks, and goats is built around one core idea: producing healthy, natural food while ensuring the animals live in a stress-free, hygienic, and sustainable environment</p>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section>
+  <div class="box">
+    <h2>Our Products</h2>
+
+    <div class="products">
+      <div class="card">
+        <h3>Chicken Eggs</h3>
+        <p>Rs.70 / dozen</p>
+        <button onclick="goToOrder('Chicken Eggs', 70)">Order</button>
+      </div>
+
+      <div class="card">
+        <h3>Duck Eggs</h3>
+        <p>Rs.120 / dozen</p>
+        <button onclick="goToOrder('Duck Eggs', 120)">Order</button>
+      </div>
+	  <div class="card">
+        <h3>Duck</h3>
+        <p>Rs.250 / kg</p>
+        <button onclick="goToOrder('Duck', 250)">Order</button>
+      </div>
+
+      <div class="card">
+        <h3>Chicken</h3>
+        <p>Rs.300 / kg</p>
+        <button onclick="goToOrder('Chicken', 250)">Order</button>
+      </div>
+
+      <div class="card">
+        <h3>Goat</h3>
+        <p>Contact for price</p>
+        <button onclick="goToOrder('Goat', 0)">Order</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- GALLERY -->
+<!-- IMAGE + VIDEO SIDE BY SIDE -->
+<section>
+  <div class="box">
+    <h2 style="text-align:center;">Farm View</h2>
+
+    <div class="slider">
+      <div class="slides" id="slides">
+
+        <div class="slide">
+          <img src="images/farm.jpg">
+        </div>
+
+        <div class="slide">
+          <video controls>
+            <source src="images/farm-video.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <div class="slide">
+          <img src="images/farm1.jpg">
+        </div>
+
+        <div class="slide">
+          <img src="images/farm2.jpg">
+        </div>
+
+      </div>
+    </div>
+
+    <!-- DOTS -->
+    <div class="dots">
+      <span onclick="goToSlide(0)"></span>
+      <span onclick="goToSlide(1)"></span>
+      <span onclick="goToSlide(2)"></span>
+      <span onclick="goToSlide(3)"></span>
+    </div>
+
+  </div>
+</section>
+<!-- MAP -->
+<section>
+  <div class="box">
+    <h2>Our Location</h2>
+
+    <iframe 
+      src="https://www.google.com/maps?q=Manavasi&output=embed"
+      style="width:100%; height:300px; border:0; border-radius:10px;">
+    </iframe>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section>
+  <div class="box">
+    <h2>Contact Us</h2>
+    <p>📞 +91-XXX-XXX-XXXX</p>
+    <p>📍 MMM Green Valley Farm, Munayanur, Karur</p>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 MMM Green Valley Farm</p>
+</footer>
+
+<script>
+function openMenu() {
+  document.getElementById("sideMenu").style.width="250px";
+  document.getElementById("overlay").style.display = "block";
+}
+function closeMenu() {
+  document.getElementById("sideMenu").style.width="0";
+  document.getElementById("overlay").style.display = "none";
+}
+</script>
+<script>
+function placeOrder() {
+
+  let name = document.getElementById("name").value;
+  let phone = document.getElementById("phone").value;
+  let address = document.getElementById("address").value;
+
+  let eggs = document.getElementById("eggs").value;
+  let duck = document.getElementById("duck").value;
+  let chicken = document.getElementById("chicken").value;
+  let goat = document.getElementById("goat").value;
+
+  let message = `New Farm Order:%0A
+Name: ${name}%0A
+Phone: ${phone}%0A
+Address: ${address}%0A
+%0AOrder Details:%0A
+Chicken Eggs: ${eggs}%0A
+Duck Eggs: ${duck}%0A
+Chicken: ${chicken}%0A
+Goat: ${goat}`;
+
+  // 👉 REPLACE WITH YOUR WHATSAPP NUMBER
+  let whatsappNumber = "1XXXXXXXXXX";
+
+  let url = `https://wa.me/${whatsappNumber}?text=${message}`;
+
+  window.open(url, "_blank");
+}
+
+</script>
+<script>
+function goToOrder(product, price) {
+  localStorage.setItem("product", product);
+  localStorage.setItem("price", price);
+  window.location.href = "order.html";
+}
+</script>
+<script>
+function goToCart() {
+  window.location.href = "cart.html";
+}
+
+function updateCartCount() {
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  let count = cart.reduce((sum, item) => sum + Number(item.qty), 0);
+  document.getElementById("cartCount").innerText = `(${count})`;
+}
+
+updateCartCount();
+</script>
+
+<script>
+  function goToSlide(index) {
+    const row = document.getElementById('media-row');
+    const dots = document.querySelectorAll('.dot');
+    
+    // Move the slider by 100% of the container width per slide
+    row.style.transform = `translateX(-${index * 100}%)`;
+    
+    // Update active dot visual
+    dots.forEach((dot, i) => {
+      dot.classList.toggle('active', i === index);
+    });
+  }
+</script>
+
+<script>
+let currentIndex = 0;
+
+const slides = document.getElementById("slides");
+const dots = document.querySelectorAll(".dots span");
+
+function updateSlider() {
+  slides.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+  dots.forEach(dot => dot.classList.remove("active"));
+  dots[currentIndex].classList.add("active");
+}
+
+function moveSlide(step) {
+  const totalSlides = dots.length;
+  currentIndex = (currentIndex + step + totalSlides) % totalSlides;
+  updateSlider();
+}
+
+function goToSlide(index) {
+  currentIndex = index;
+  updateSlider();
+}
+
+/* Initialize */
+//updateSlider();
+</script>
+<script>
+setInterval(() => {
+moveSlide(1);
+}, 4000);
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  updateCartCount();
+});
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  updateCartCount();
+});
+</script>
+<script>
+window.addEventListener("pageshow", function () {
+  updateCartCount();
+});
+</script>
+
+<script>
+function openProduct(name) {
+  window.location.href = "product.html?item=" + encodeURIComponent(name);
+}
+</script>
+</body>
+</html>

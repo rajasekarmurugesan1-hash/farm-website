@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Farm Shop</title>
+
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  font-family: 'Segoe UI', Arial;
+  background: #f4f6f5;
+}
+
+/* HEADER */
+.header {
+  background: linear-gradient(90deg,#14532d,#166534);
+  color:white;
+  padding:18px;
+  text-align:center;
+  position: relative;
+}
+
+.cart-icon {
+  position:absolute;
+  right:20px;
+  top:18px;
+  background:white;
+  color:black;
+  padding:6px 12px;
+  border-radius:20px;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+/* CARD */
+.container {
+  max-width: 950px;
+  margin: 30px auto;
+  background:white;
+  border-radius:15px;
+  padding:25px;
+  display:flex;
+  gap:30px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.1);
+}
+
+/* IMAGE */
+.product-img img {
+  width:100%;
+  max-width:400px;
+  height:300px;
+  object-fit:cover;
+  border-radius:12px;
+}
+
+/* DETAILS */
+.details { flex:1; }
+
+.details h2 {
+  color:#14532d;
+  margin-bottom:10px;
+}
+
+.price {
+  font-size:22px;
+  font-weight:bold;
+  margin-bottom:10px;
+}
+
+/* QTY */
+.qty-box {
+  display:flex;
+  align-items:center;
+  gap:15px;
+  margin:15px 0;
+}
+
+.qty-box button {
+  width:40px;
+  height:40px;
+  font-size:18px;
+  cursor:pointer;
+}
+
+/* BUTTONS */
+.btn {
+  width:100%;
+  padding:12px;
+  border:none;
+  border-radius:8px;
+  font-size:16px;
+  cursor:pointer;
+  margin-top:10px;
+}
+
+.add { background:#16a34a; color:white; }
+.buy { background:#14532d; color:white; }
+
+/* QUALITY */
+.quality {
+  margin-top:15px;
+  font-size:14px;
+  color:#555;
+}
+
+/* EMPTY */
+.empty {
+  text-align:center;
+  padding:50px;
+  color:#777;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+  .container { flex-direction:column; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+  <h2>Farm Fresh Products</h2>
+  <div class="cart-icon" onclick="goToCart()">
+    🛒 <span id="cartCount">0</span>
+  </div>
+</div>
+
+<div id="mainContainer" class="container">
+
+  <!-- IMAGE -->
+  <div class="product-img">
+    <img id="productImage">
+  </div>
+
+  <!-- DETAILS -->
+  <div class="details">
+    <h2 id="productName"></h2>
+    <div class="price" id="productPrice"></div>
+    <p id="description"></p>
+
+    <!-- QTY -->
+    <div class="qty-box">
+      <button onclick="changeQty(-1)">➖</button>
+      <span id="qty">1</span>
+      <button onclick="changeQty(1)">➕</button>
+    </div>
+
+    <p id="total"></p>
+
+    <button class="btn add" onclick="addToCart()">Add to Cart</button>
+    <button class="btn buy" onclick="buyNow()">Buy Now</button>
+
+    <div class="quality">
+      🌿 100% Natural Feed <br>
+      🚫 No Chemicals <br>
+      🐓 Free Range Farming <br>
+      🚚 Fresh from Farm
+    </div>
+  </div>
+
+</div>
+
+<div id="emptyState" class="empty" style="display:none;">
+  Please select a product from homepage.
+</div>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const item = params.get("item");
+
+let qty = 1;
+
+/* PRODUCT DATA */
+const data = {
+  "Chicken Eggs": {
+    price: 70,
+    desc: "Farm fresh eggs from free-range chickens.",
+    img: "images/farm.jpg"
+  },
+  "Duck Eggs": {
+    price: 90,
+    desc: "Nutrient-rich duck eggs.",
+    img: "images/farm2.jpg"
+  },
+  "Chicken": {
+    price: 250,
+    desc: "Naturally raised chickens.",
+    img: "images/farm3.jpg"
+  },
+  "Duck": {
+    price: 350,
+    desc: "Healthy farm ducks.",
+    img: "images/farm2.jpg"
+  },
+  "Goat": {
+    price: 500,
+    desc: "Organic farm goats.",
+    img: "images/farm.jpg"
+  }
+};
+
+const product = data[item];
+
+/* LOAD */
+if (product) {
+  document.getElementById("productName").innerText = item;
+  document.getElementById("productPrice").innerText = "Rs." + product.price;
+  document.getElementById("description").innerText = product.desc;
+  document.getElementById("productImage").src = product.img;
+} else {
+  document.getElementById("mainContainer").style.display = "none";
+  document.getElementById("emptyState").style.display = "block";
+}
+
+/* TOTAL */
+function updateTotal() {
+  document.getElementById("total").innerText =
+    "Total: Rs." + (product.price * qty);
+}
+
+/* QTY */
+function changeQty(val) {
+  qty += val;
+  if (qty < 1) qty = 1;
+  document.getElementById("qty").innerText = qty;
+  updateTotal();
+}
+
+/* CART COUNT */
+function updateCartCount() {
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  let count = cart.reduce((sum, item) => sum + item.qty, 0);
+  document.getElementById("cartCount").innerText = count;
+}
+
+/* ADD CART */
+function addToCart() {
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  let existing = cart.find(i => i.product === item);
+
+  if (existing) {
+    existing.qty += qty;
+  } else {
+    cart.push({ product: item, price: product.price, qty });
+  }
+
+  localStorage.setItem("cart", JSON.stringify(cart));
+  updateCartCount();
+}
+
+/* BUY */
+function buyNow() {
+  addToCart();
+  window.location.href = "cart.html";
+}
+
+/* NAV */
+function goToCart() {
+  window.location.href = "cart.html";
+}
+
+updateTotal();
+updateCartCount();
+</script>
+
+</body>
+</html>

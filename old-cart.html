@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Your Cart</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Arial;
+  background: #f4f6f5;
+}
+
+/* HEADER */
+.header {
+  position: relative;
+  text-align: center;
+  padding: 20px;
+  background: linear-gradient(90deg, #14532d, #166534);
+  color: white;
+}
+
+/* CART ICON */
+.cart-icon {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: white;
+  padding: 8px 12px;
+  border-radius: 20px;
+  font-weight: bold;
+  color: black;
+}
+
+/* CONTAINER */
+.container {
+  max-width: 800px;
+  margin: 30px auto;
+  padding: 15px;
+}
+
+/* CART ITEM */
+.cart-item {
+  background: white;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+  text-align: center;
+}
+
+.cart-item h3 {
+  margin-bottom: 10px;
+}
+
+/* QTY BUTTONS */
+.qty-box {
+  margin: 10px 0;
+}
+
+.qty-box button {
+  padding: 6px 10px;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+/* BUTTONS */
+.btn {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.remove { background: red; color: white; }
+.nav { background: #333; color: white; }
+.checkout { background: green; color: white; }
+
+/* TOTAL */
+.total-box {
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 15px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <h2>🛒 Your Cart</h2>
+  <div class="cart-icon">🛒 <span id="cartCount">0</span></div>
+</div>
+
+<div class="container">
+
+  <div id="cartItems"></div>
+  <div id="total" class="total-box"></div>
+
+  <br>
+
+  <button class="btn nav" onclick="continueShopping()">⬅ Continue Shopping</button>
+  <button class="btn checkout" onclick="checkout()">✅ Checkout</button>
+
+</div>
+
+<script>
+
+/* GET CART */
+function getCart() {
+  return JSON.parse(localStorage.getItem("cart")) || [];
+}
+
+/* SAVE CART */
+function saveCart(cart) {
+  if (cart.length === 0) {
+    localStorage.removeItem("cart");
+  } else {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }
+}
+
+/* UPDATE CART COUNT */
+function updateCartCount() {
+  let cart = getCart();
+  let count = cart.reduce((sum, item) => sum + Number(item.qty || 0), 0);
+  document.getElementById("cartCount").innerText = count;
+}
+
+/* RENDER CART */
+function renderCart() {
+  let cart = getCart();
+
+  let container = document.getElementById("cartItems");
+  let totalEl = document.getElementById("total");
+
+  container.innerHTML = "";
+
+  if (cart.length === 0) {
+    container.innerHTML = "<p>Your cart is empty</p>";
+    totalEl.innerHTML = "";
+    updateCartCount();
+    return;
+  }
+
+  let total = 0;
+
+  cart.forEach((item, index) => {
+    let itemTotal = item.price * item.qty;
+    total += itemTotal;
+
+    container.innerHTML += `
+      <div class="cart-item">
+        <h3>${item.product}</h3>
+
+        <div class="qty-box">
+          <button onclick="decreaseQty(${index})">➖</button>
+          <span>${item.qty}</span>
+          <button onclick="increaseQty(${index})">➕</button>
+        </div>
+
+        <p>Price: Rs.${item.price}</p>
+        <p>Total: Rs.${itemTotal}</p>
+
+        <button class="btn remove" onclick="removeItem(${index})">Remove</button>
+      </div>
+    `;
+  });
+
+  totalEl.innerHTML = "Total Amount: Rs." + total;
+  updateCartCount();
+}
+
+/* ACTIONS */
+function increaseQty(index) {
+  let cart = getCart();
+  cart[index].qty++;
+  saveCart(cart);
+  renderCart();
+}
+
+function decreaseQty(index) {
+  let cart = getCart();
+
+  if (cart[index].qty > 1) {
+    cart[index].qty--;
+  } else {
+    cart.splice(index, 1);
+  }
+
+  saveCart(cart);
+  renderCart();
+}
+
+function removeItem(index) {
+  let cart = getCart();
+  cart.splice(index, 1);
+  saveCart(cart);
+  renderCart();
+}
+
+/* NAVIGATION */
+function continueShopping() {
+  window.location.href = "index.html";
+}
+
+/* CHECKOUT */
+function checkout() {
+  let cart = getCart();
+
+  if (cart.length === 0) {
+    alert("Cart is empty!");
+    return;
+  }
+
+  let message = "Order Details:%0A";
+
+  cart.forEach(item => {
+    message += `${item.product} - ${item.qty} x Rs.${item.price}%0A`;
+  });
+
+  let total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+  message += `%0ATotal: Rs.${total}`;
+
+  let phone = "91123456789"; // change this
+
+  window.open(`https://wa.me/${phone}?text=${message}`, "_blank");
+}
+
+/* INIT */
+document.addEventListener("DOMContentLoaded", function () {
+  renderCart();
+});
+
+/* FIX BACK NAVIGATION */
+window.addEventListener("pageshow", function () {
+  renderCart();
+});
+
+</script>
+
+</body>
+</html>

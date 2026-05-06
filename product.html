@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Product Details</title>
+
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  font-family: 'Segoe UI', Arial;
+  background: #f4f6f5;
+}
+
+/* HEADER */
+.header {
+  background: linear-gradient(90deg,#14532d,#166534);
+  color:white;
+  padding:15px;
+  text-align:center;
+}
+
+/* CARD */
+.container {
+  max-width: 900px;
+  margin: 30px auto;
+  background: white;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+/* IMAGE */
+img {
+  width:100%;
+  height:300px;
+  object-fit:cover;
+  border-radius:12px;
+  margin-top:15px;
+}
+
+/* TEXT */
+h2 {
+  text-align:center;
+  color:#14532d;
+}
+
+p {
+  margin-top:15px;
+  line-height:1.6;
+  color:#555;
+  text-align:center;
+}
+
+/* BUTTON */
+button {
+  width:100%;
+  padding:14px;
+  background:#16a34a;
+  color:white;
+  border:none;
+  border-radius:8px;
+  margin-top:20px;
+  cursor:pointer;
+  font-size:16px;
+}
+
+button:hover {
+  background:#14532d;
+}
+
+/* EMPTY STATE */
+.empty {
+  text-align:center;
+  margin-top:30px;
+  color:#777;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+  <h2>Farm Product Details</h2>
+</div>
+
+<div class="container">
+
+  <h2 id="title">Loading...</h2>
+  <p id="description"></p>
+
+  <img id="image" src="">
+
+  <button id="orderBtn" onclick="orderNow()">🛒 Order Now</button>
+
+  <div id="emptyState" class="empty" style="display:none;">
+    Please go back and select a product from the homepage.
+  </div>
+
+</div>
+
+<script>
+// GET PRODUCT FROM URL
+const params = new URLSearchParams(window.location.search);
+const item = params.get("item");
+
+/* PRODUCT DATA */
+const data = {
+  "Chicken Eggs": {
+    name: "Chicken Eggs",
+    price: 70,
+    desc: "Farm fresh eggs from free-range chickens. High protein and chemical-free.",
+    img: "images/farm.jpg"
+  },
+  "Duck Eggs": {
+    name: "Duck Eggs",
+    price: 90,
+    desc: "Larger, richer eggs packed with nutrients.",
+    img: "images/farm2.jpg"
+  },
+  "Duck": {
+    name: "Duck",
+    price: 350,
+    desc: "Healthy ducks raised in natural environment.",
+    img: "images/farm2.jpg"
+  },
+  "Chicken": {
+    name: "Chicken",
+    price: 250,
+    desc: "Naturally grown chickens, no chemicals.",
+    img: "images/farm3.jpg"
+  },
+  "Goat": {
+    name: "Goat",
+    price: 500,
+    desc: "Strong and healthy goats raised organically.",
+    img: "images/farm.jpg"
+  }
+};
+
+const product = data[item];
+
+/* LOAD PRODUCT */
+if (product) {
+  document.getElementById("title").innerText = product.name;
+  document.getElementById("description").innerText = product.desc;
+  document.getElementById("image").src = product.img;
+} else {
+  // HANDLE NO PRODUCT CASE
+  document.getElementById("title").innerText = "Product Not Found";
+  document.getElementById("description").innerText = "";
+  document.getElementById("image").style.display = "none";
+  document.getElementById("orderBtn").style.display = "none";
+  document.getElementById("emptyState").style.display = "block";
+}
+
+/* ORDER BUTTON */
+function orderNow() {
+  if (!product) {
+    alert("No product selected!");
+    return;
+  }
+
+  localStorage.setItem("product", product.name);
+  localStorage.setItem("price", product.price);
+
+  window.location.href = "order.html";
+}
+</script>
+
+</body>
+</html>
+
+
