@@ -33,11 +33,20 @@ body {
 
 /* IMAGE */
 img {
-  width:100%;
-  height:300px;
-  object-fit:cover;
-  border-radius:12px;
-  margin-top:15px;
+  width: 100%;
+  height: 420px;
+  object-fit: contain;
+  background: #f5f5f5;
+  border-radius: 16px;
+  padding: 10px;
+}
+
+@media(max-width:768px){
+
+  .product-image img{
+    height: 280px;
+  }
+
 }
 
 /* TEXT */
@@ -110,14 +119,15 @@ const data = {
   "Chicken Eggs": {
     name: "Chicken Eggs",
     price: 70,
-    desc: "Farm fresh eggs from free-range chickens. High protein and chemical-free.",
-    img: "images/farm.jpg"
+    desc: "Farm fresh eggs from free-range chickens. High protein and chemical-free. The Everyday Classic (Chicken Eggs)Our hens roam free, foraging on fresh greens and sunshine. The result? A vibrant, sun-orange yolk and a clean, rich flavor that store-bought eggs can’t match. Perfect for your morning scramble or the family’s favorite breakfast.",
+    img: "images/chicken-eggs.jpg"
   },
   "Duck Eggs": {
     name: "Duck Eggs",
     price: 90,
-    desc: "Larger, richer eggs packed with nutrients.",
-    img: "images/farm2.jpg"
+    desc: "From Our Pastures to Your Plate: Experience the Difference of Farm-Fresh Eggs. Discover the rich, golden yolks and superior nutrition of our pasture-raised chicken and specialty duck eggs. Hand-collected daily, delivered with care.",
+    img: "images/duckeggs.jpg"
+	
   },
   "Duck": {
     name: "Duck",

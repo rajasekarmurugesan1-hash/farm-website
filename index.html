@@ -13,10 +13,43 @@
   box-sizing: border-box;
 }
 
-/* REMOVE ALL TOP GAP AFTER HEADER */
-header + section {
-  padding-top: 10px !important;
-  margin-top: 0 !important;
+
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  margin: 0;
+  color: #222;
+  line-height: 1.5;
+
+  /* BACKGROUND IMAGE */
+  background-image: url("images/farm-bg.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+
+  /* LIGHT OVERLAY EFFECT */
+  position: relative;
+}
+
+.box {
+  max-width: 1000px;
+  margin: 0 auto;
+  background: rgba(255,255,255,0.92);
+  border-radius: 15px;
+  padding: 22px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+
+  /* GLASS EFFECT */
+  backdrop-filter: blur(4px);
+}
+
+header {
+  background: rgba(20, 83, 45, 0.92);
+  backdrop-filter: blur(4px);
+}
+
+footer {
+  background: rgba(20, 83, 45, 0.92);
+  backdrop-filter: blur(4px);
 }
 
 /* REMOVE EXTRA SPACE FROM FIRST BOX */
@@ -24,15 +57,40 @@ section:first-of-type .box {
   margin-top: 0 !important;
 }
 
+
+/* SECTION SPACING */
+section {
+  padding: 8px 15px;
+  margin: 0 auto;
+}
+
+/* BOX */
+.box {
+  max-width: 1000px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 15px;
+  padding: 22px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+
+/* REMOVE EXTRA TOP GAP */
+section:first-of-type {
+  padding-top: 8px;
+}
+
+/* HEADINGS */
+h2 {
+  margin-bottom: 12px;
+  color: #14532d;
+  text-align: center;
+}
+
 /* REMOVE DEFAULT HEADING SPACE */
 h2 {
   margin-top: 0 !important;
 }
 
-/* OPTIONAL: tighten section spacing globally */
-section {
-  padding: 20px 20px;
-}
 /* BODY */
 body {
   font-family: 'Segoe UI', Arial, sans-serif;
@@ -86,11 +144,6 @@ header {
   background: #166534;
 }
 
-/* SECTIONS */
-section {
-  padding: 30px 20px;   /* uniform spacing */
-}
-
 /* FIRST SECTION FIX */
 section:first-of-type {
   padding-top: 20px;
@@ -104,19 +157,16 @@ h2 {
 }
 
 /* BOX CONTAINER */
-.box {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 20px;
+
+.section-box {
   background: white;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+  padding: 20px 25px;
+  margin: 20px auto;
+  border-radius: 15px;
+  max-width: 1200px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
 }
 
-/* ADD SPACE BETWEEN BOXES */
-section + section {
-  margin-top: 10px;
-}
 
 .products {
   display: grid;
@@ -180,10 +230,6 @@ header {
   box-shadow: 0 2px 10px rgba(0,0,0,0.2);
 }
 
-/* SECTION SPACING */
-section {
-  padding: 50px 20px;
-}
 
 /* CARD CONTAINER */
 .box {
@@ -421,6 +467,11 @@ footer {
 }
 
 
+.container {
+  margin: 20px auto;
+  padding: 25px;
+}
+
 
 html {
   scroll-behavior: smooth;
@@ -485,7 +536,7 @@ function closeMenu() {
 <section id="about">
   <div class="box">
     <h2>About Our Farm</h2>
-    <p>We raise chickens, ducks, and goats in a clean and natural environment.A clean, organic livestock farm that raises chickens, ducks, and goats is built around one core idea: producing healthy, natural food while ensuring the animals live in a stress-free, hygienic, and sustainable environment</p>
+    <p>We raise chickens, ducks, and goats in a clean and natural environment. A clean, organic livestock farm that raises chickens, ducks, and goats is built around one core idea: producing healthy, natural food while ensuring the animals live in a stress-free, hygienic, and sustainable environment</p>
   </div>
 </section>
 
@@ -581,7 +632,18 @@ function closeMenu() {
   </div>
 </section>
 
-<!-- CONTACT -->
+<!-- Why choose us -->
+<section>
+  <div class="box">
+
+ 
+    <h2>Why Choose Us</h2>
+    <p><b>Pasture-Raised:</b> Our birds live outside where they belong, leading to happier lives and more nutrient-packed eggs.</p><br>
+    <p><b>Daily Collection:</b> We hand-gather every egg to ensure you receive the freshest product possible.</p><br>
+	<p><b>Local & Sustainable:</b>When you buy from us, you aren’t just getting food; you’re supporting local agriculture and sustainable farming practices.</p>
+  </div>
+</section>
+
 <section>
   <div class="box">
     <h2>Contact Us</h2>

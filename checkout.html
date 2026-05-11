@@ -3,166 +3,575 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Checkout</title>
+<title>Checkout - MMM Green Valley Farm</title>
 
 <style>
-body {
-  font-family: 'Segoe UI', Arial;
-  background:#f4f6f5;
+
+*{
   margin:0;
+  padding:0;
+  box-sizing:border-box;
 }
 
-.header {
-  background: linear-gradient(90deg,#14532d,#166534);
+body{
+  font-family:'Segoe UI', Arial, sans-serif;
+  background:#f5f7f6;
+  color:#222;
+}
+
+/* HEADER */
+header{
+  background:linear-gradient(90deg,#14532d,#166534);
   color:white;
-  padding:15px;
+  padding:22px;
   text-align:center;
+  box-shadow:0 2px 10px rgba(0,0,0,0.15);
 }
 
-.container {
-  max-width:900px;
-  margin:30px auto;
-  display:flex;
-  gap:20px;
+header h1{
+  font-size:34px;
+  font-weight:700;
 }
 
-/* FORM */
-.form {
-  flex:2;
+/* MAIN LAYOUT */
+.checkout-container{
+  max-width:1300px;
+  margin:35px auto;
+  display:grid;
+  grid-template-columns:2fr 1fr;
+  gap:30px;
+  padding:0 20px;
+}
+
+/* LEFT + RIGHT BOX */
+.checkout-box,
+.summary-box{
   background:white;
-  padding:20px;
-  border-radius:12px;
+  border-radius:22px;
+  padding:30px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.08);
 }
 
-input, textarea {
+/* SECTION TITLES */
+.section-title{
+  font-size:28px;
+  margin-bottom:25px;
+  color:#14532d;
+  font-weight:700;
+}
+
+/* INPUTS */
+.input-group{
+  margin-bottom:22px;
+}
+
+.input-group label{
+  display:block;
+  margin-bottom:10px;
+  font-weight:600;
+  font-size:15px;
+}
+
+.input-group input,
+.input-group textarea{
   width:100%;
-  padding:10px;
-  margin:8px 0;
-  border-radius:6px;
-  border:1px solid #ccc;
+  padding:16px;
+  border:1px solid #ddd;
+  border-radius:14px;
+  font-size:16px;
+  transition:0.3s;
+  background:#fafafa;
+}
+
+.input-group input:focus,
+.input-group textarea:focus{
+  border-color:#16a34a;
+  outline:none;
+  background:white;
+  box-shadow:0 0 0 4px rgba(22,163,74,0.1);
+}
+
+textarea{
+  resize:none;
+  height:120px;
+}
+
+/* PHONE FIELD */
+.phone-box{
+  display:flex;
+  align-items:center;
+  border:1px solid #ddd;
+  border-radius:14px;
+  overflow:hidden;
+  background:#fafafa;
+}
+
+.country-code{
+  background:#eef7f0;
+  padding:16px 18px;
+  font-weight:700;
+  color:#14532d;
+  border-right:1px solid #ddd;
+}
+
+.phone-box input{
+  border:none;
+  background:transparent;
+  flex:1;
+}
+
+.phone-box input:focus{
+  box-shadow:none;
+}
+
+/* PAYMENT METHODS */
+.payment-grid{
+  display:grid;
+  gap:18px;
+  margin-top:10px;
+}
+
+.payment-card{
+  border:2px solid #eee;
+  border-radius:18px;
+  padding:20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  cursor:pointer;
+  transition:0.3s;
+  background:#fafafa;
+}
+
+.payment-card:hover{
+  border-color:#16a34a;
+  transform:translateY(-2px);
+}
+
+.payment-left{
+  display:flex;
+  align-items:center;
+  gap:15px;
+}
+
+.payment-icon{
+  width:55px;
+  height:55px;
+  border-radius:14px;
+  background:#ecfdf3;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:26px;
+}
+
+.payment-title{
+  font-size:18px;
+  font-weight:700;
+}
+
+.payment-sub{
+  font-size:14px;
+  color:#666;
+  margin-top:4px;
+}
+
+/* RADIO */
+.payment-card input{
+  transform:scale(1.3);
+}
+
+/* PLACE ORDER BUTTON */
+.place-order-btn{
+  width:100%;
+  padding:18px;
+  border:none;
+  border-radius:16px;
+  background:linear-gradient(90deg,#16a34a,#15803d);
+  color:white;
+  font-size:18px;
+  font-weight:700;
+  cursor:pointer;
+  margin-top:30px;
+  transition:0.3s;
+}
+
+.place-order-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 10px 20px rgba(22,163,74,0.25);
 }
 
 /* SUMMARY */
-.summary {
-  flex:1;
-  background:white;
-  padding:20px;
-  border-radius:12px;
-  height:fit-content;
+.summary-title{
+  font-size:28px;
+  color:#14532d;
+  margin-bottom:25px;
+  font-weight:700;
 }
 
-.total {
-  font-weight:bold;
-  margin-top:10px;
+.summary-item{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:18px;
+  padding-bottom:14px;
+  border-bottom:1px solid #eee;
 }
 
-/* BUTTON */
-button {
+.summary-name{
+  font-weight:600;
+}
+
+.summary-price{
+  font-weight:700;
+}
+
+.total-box{
+  margin-top:25px;
+  padding-top:20px;
+  border-top:2px solid #eee;
+  display:flex;
+  justify-content:space-between;
+  font-size:24px;
+  font-weight:800;
+  color:#14532d;
+}
+
+/* SUCCESS MESSAGE */
+.success-box{
+  display:none;
+  margin-top:25px;
+  background:#ecfdf3;
+  color:#166534;
+  padding:18px;
+  border-radius:16px;
+  font-weight:600;
+  text-align:center;
+  border:1px solid #bbf7d0;
+}
+
+/* BUTTONS */
+.secondary-btn{
   width:100%;
-  padding:12px;
-  margin-top:10px;
+  padding:14px;
   border:none;
-  border-radius:8px;
-  background:#16a34a;
+  border-radius:14px;
+  margin-top:15px;
+  background:#14532d;
   color:white;
+  font-size:16px;
   cursor:pointer;
+  transition:0.3s;
 }
 
-@media(max-width:768px){
-  .container { flex-direction:column; }
+.secondary-btn:hover{
+  background:#166534;
 }
+
+/* MOBILE */
+@media(max-width:900px){
+
+  .checkout-container{
+    grid-template-columns:1fr;
+  }
+
+  header h1{
+    font-size:28px;
+  }
+
+  .checkout-box,
+  .summary-box{
+    padding:22px;
+  }
+
+  .section-title,
+  .summary-title{
+    font-size:24px;
+  }
+}
+
 </style>
 </head>
 
 <body>
 
-<div class="header">
-  <h2>Checkout</h2>
-</div>
+<header>
+  <h1>Secure Checkout</h1>
+</header>
 
-<div class="container">
+<div class="checkout-container">
 
-  <!-- FORM -->
-  <div class="form">
-    <h3>Customer Details</h3>
+  <!-- LEFT -->
+  <div class="checkout-box">
 
-    <input type="text" id="name" placeholder="Full Name" required>
-    <input type="tel" id="phone" placeholder="Phone Number" required>
-    <textarea id="address" placeholder="Delivery Address"></textarea>
+    <h2 class="section-title">Customer Details</h2>
 
-    <button onclick="placeOrder()">Place Order</button>
+    <div class="input-group">
+      <label>Full Name</label>
+      <input type="text" id="name" placeholder="Enter your full name">
+    </div>
+
+    <div class="input-group">
+      <label>Mobile Number</label>
+
+      <div class="phone-box">
+        <div class="country-code">+91</div>
+
+        <input
+          type="tel"
+          id="phone"
+          placeholder="Enter mobile number"
+          maxlength="10"
+          inputmode="numeric"
+          oninput="this.value=this.value.replace(/[^0-9]/g,'')"
+        >
+      </div>
+    </div>
+
+    <div class="input-group">
+      <label>Delivery Address</label>
+
+      <textarea
+        id="address"
+        placeholder="Enter your full delivery address">
+      </textarea>
+    </div>
+
+    <!-- PAYMENT -->
+    <h2 class="section-title">Payment Method</h2>
+
+    <div class="payment-grid">
+
+      <!-- UPI -->
+      <label class="payment-card">
+
+        <div class="payment-left">
+          <div class="payment-icon">💳</div>
+
+          <div>
+            <div class="payment-title">UPI Payment</div>
+            <div class="payment-sub">
+              Pay using Google Pay, PhonePe or Paytm
+            </div>
+          </div>
+        </div>
+
+        <input type="radio" name="payment" value="upi" checked>
+
+      </label>
+
+      <!-- WHATSAPP -->
+      <label class="payment-card">
+
+        <div class="payment-left">
+          <div class="payment-icon">📱</div>
+
+          <div>
+            <div class="payment-title">WhatsApp Order</div>
+            <div class="payment-sub">
+              Send order directly on WhatsApp
+            </div>
+          </div>
+        </div>
+
+        <input type="radio" name="payment" value="whatsapp">
+
+      </label>
+
+      <!-- COD -->
+      <label class="payment-card">
+
+        <div class="payment-left">
+          <div class="payment-icon">💵</div>
+
+          <div>
+            <div class="payment-title">Cash on Delivery</div>
+            <div class="payment-sub">
+              Pay when product arrives
+            </div>
+          </div>
+        </div>
+
+        <input type="radio" name="payment" value="cod">
+
+      </label>
+
+    </div>
+
+    <button class="place-order-btn" onclick="placeOrder()">
+      Place Order
+    </button>
+
+    <div class="success-box" id="successBox">
+      ✅ Order placed successfully!
+    </div>
+
   </div>
 
-  <!-- SUMMARY -->
-  <div class="summary">
-    <h3>Order Summary</h3>
-    <div id="summary"></div>
-    <div id="total" class="total"></div>
+  <!-- RIGHT -->
+  <div class="summary-box">
+
+    <h2 class="summary-title">Order Summary</h2>
+
+    <div id="summaryItems"></div>
+
+    <div class="total-box">
+      <span>Total</span>
+      <span id="grandTotal">Rs.0</span>
+    </div>
+
+    <button class="secondary-btn" onclick="continueShopping()">
+      Continue Shopping
+    </button>
+
   </div>
 
 </div>
 
 <script>
+
+/* LOAD CART */
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-/* LOAD SUMMARY */
-function loadSummary() {
-  let summary = document.getElementById("summary");
-  let totalEl = document.getElementById("total");
+/* SUMMARY */
+function loadSummary(){
 
-  if (cart.length === 0) {
-    summary.innerHTML = "Cart is empty";
+  let summary = document.getElementById("summaryItems");
+  let grandTotal = document.getElementById("grandTotal");
+
+  summary.innerHTML = "";
+
+  if(cart.length === 0){
+
+    summary.innerHTML = `
+      <p style="color:#777;">
+        Your cart is empty
+      </p>
+    `;
+
+    grandTotal.innerText = "Rs.0";
     return;
   }
 
   let total = 0;
-  summary.innerHTML = "";
 
   cart.forEach(item => {
+
     let itemTotal = item.price * item.qty;
     total += itemTotal;
 
     summary.innerHTML += `
-      <p>${item.product} - ${item.qty} x Rs.${item.price}</p>
+      <div class="summary-item">
+        <div>
+          <div class="summary-name">${item.product}</div>
+          <div style="font-size:14px;color:#666;">
+            Qty: ${item.qty}
+          </div>
+        </div>
+
+        <div class="summary-price">
+          Rs.${itemTotal}
+        </div>
+      </div>
     `;
   });
 
-  totalEl.innerText = "Total: Rs." + total;
+  grandTotal.innerText = "Rs." + total;
 }
 
 /* PLACE ORDER */
-function placeOrder() {
-  let name = document.getElementById("name").value;
-  let phone = document.getElementById("phone").value;
-  let address = document.getElementById("address").value;
+function placeOrder(){
 
-  if (!name || !phone) {
-    alert("Please fill required fields");
+  let name = document.getElementById("name").value.trim();
+  let phone = document.getElementById("phone").value.trim();
+  let address = document.getElementById("address").value.trim();
+
+  if(cart.length === 0){
     return;
   }
 
-  let orders = JSON.parse(localStorage.getItem("orders")) || [];
+  if(!name || !phone || !address){
+    alert("Please fill all fields");
+    return;
+  }
+
+  if(phone.length !== 10){
+    alert("Enter valid 10-digit mobile number");
+    return;
+  }
+
+  let payment =
+    document.querySelector('input[name="payment"]:checked').value;
+
+  let orders =
+    JSON.parse(localStorage.getItem("orders")) || [];
 
   let newOrder = {
     id: Date.now(),
     name,
-    phone,
+    phone:"+91" + phone,
     address,
-    items: cart,
-    date: new Date().toLocaleString()
+    payment,
+    items:cart,
+    date:new Date().toLocaleString()
   };
 
   orders.push(newOrder);
 
   localStorage.setItem("orders", JSON.stringify(orders));
+
+  /* WHATSAPP */
+  if(payment === "whatsapp"){
+
+    let message = "New Farm Order:%0A%0A";
+
+    message += "Customer: " + name + "%0A";
+    message += "Phone: +91" + phone + "%0A";
+    message += "Address: " + address + "%0A%0A";
+
+    message += "Order Details:%0A";
+
+    cart.forEach(item => {
+      message += `${item.product} - ${item.qty} x Rs.${item.price}%0A`;
+    });
+
+    window.open(
+      "https://wa.me/918220397722?text=" + message,
+      "_blank"
+    );
+  }
+
+  /* UPI */
+  if(payment === "upi"){
+
+    let total = cart.reduce((sum,item)=>{
+      return sum + (item.price * item.qty);
+    },0);
+
+    let upiLink =
+      `upi://pay?pa=yourupi@okaxis&pn=MMM Farm&am=${total}&cu=INR`;
+
+    window.location.href = upiLink;
+  }
+
+  /* SUCCESS */
+  document.getElementById("successBox").style.display = "block";
+
+  /* CLEAR CART */
   localStorage.removeItem("cart");
 
-  alert("Order placed successfully!");
-
-  window.location.href = "orders.html";
+  setTimeout(()=>{
+    window.location.href = "orders.html";
+  },2000);
 }
 
+/* CONTINUE SHOPPING */
+function continueShopping(){
+  window.location.href = "index.html";
+}
+
+/* INITIALIZE */
 loadSummary();
+
 </script>
 
 </body>
