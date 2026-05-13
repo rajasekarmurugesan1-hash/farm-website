@@ -1,407 +1,890 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Order Product</title>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>Green Valley Farms - Premium Order</title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
 <style>
-body {
-  font-family: 'Segoe UI', Arial;
-  margin: 0;
-  background: #f4f6f5;
-}
-.container {
-  border: 1px solid #eee;
-}
-/* CART ICON (RIGHT) */
-.cart-icon {
-  position: absolute;
-  right: 20px;
-  top: 20px;
-  cursor: pointer;
-  font-size: 18px;
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-.container {
-  max-width: 900px;
-  margin: 30px auto;
-  background: white;
-  border-radius: 15px;
-  padding: 20px;
-  display: flex;
-  gap: 30px;
-  align-items: center;   /* KEY FIX */
-  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+body{
+    font-family:'Segoe UI',sans-serif;
+    background:#f4f7f3;
+    color:#222;
+    overflow-x:hidden;
 }
 
-.cart-icon.animate {
-  transform: scale(1.2);
-  transition: 0.2s;
+/* HEADER */
+
+.header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    background:rgba(20,83,45,0.96);
+    backdrop-filter:blur(10px);
+    padding:18px 50px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 4px 18px rgba(0,0,0,0.08);
 }
 
-/*IMAGE*/
-.product-img {
-  flex: 1;
-  display: flex;
-  justify-content: center;
+.logo{
+    color:white;
+    font-size:30px;
+    font-weight:700;
+    display:flex;
+    align-items:center;
+    gap:12px;
 }
 
-.product-img img {
-  width: 100%;
-  max-width: 350px;
-  height: 260px;
-  object-fit: cover;
-  border-radius: 12px;
-  border: 1px solid #ddd;
+.nav-buttons{
+    display:flex;
+    gap:15px;
+}
+
+.nav-btn{
+    text-decoration:none;
+    color:white;
+    background:rgba(255,255,255,0.12);
+    padding:12px 20px;
+    border-radius:14px;
+    transition:0.3s;
+    font-weight:600;
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.nav-btn:hover{
+    background:white;
+    color:#14532d;
+    transform:translateY(-2px);
+}
+
+/* CART BADGE */
+
+.cart-btn{
+    position:relative;
+}
+
+.cart-count{
+    position:absolute;
+    top:-8px;
+    right:-8px;
+    background:#ffcc00;
+    color:black;
+    width:24px;
+    height:24px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:12px;
+    font-weight:bold;
+}
+
+/* MAIN SECTION */
+
+.order-section{
+    max-width:1450px;
+    margin:45px auto;
+    background:white;
+    border-radius:35px;
+    overflow:hidden;
+    box-shadow:0 20px 50px rgba(0,0,0,0.08);
+    display:grid;
+    grid-template-columns:1fr 1fr;
+}
+
+/* IMAGE SIDE */
+
+.image-side{
+    background:linear-gradient(135deg,#edf7ef,#f8faf8);
+    padding:40px;
+}
+
+.main-image-container{
+    background:white;
+    border-radius:28px;
+    padding:25px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.08);
+    margin-bottom:25px;
+    position:relative;
+}
+
+.main-image{
+    width:100%;
+    height:520px;
+    object-fit:contain;
+}
+
+.image-tag{
+    position:absolute;
+    top:20px;
+    left:20px;
+    background:#16a34a;
+    color:white;
+    padding:10px 18px;
+    border-radius:30px;
+    font-size:14px;
+    font-weight:bold;
+}
+
+.thumbnail-row{
+    display:flex;
+    gap:15px;
+    flex-wrap:wrap;
+}
+
+.thumb{
+    width:95px;
+    height:95px;
+    object-fit:cover;
+    border-radius:18px;
+    cursor:pointer;
+    border:3px solid transparent;
+    transition:0.3s;
+    background:white;
+    padding:5px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.08);
+}
+
+.thumb:hover{
+    transform:translateY(-4px);
+    border-color:#16a34a;
 }
 
 /* DETAILS */
-.details {
-  flex: 1;
-  text-align: left;
+
+.details-side{
+    padding:60px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
 }
 
-.price {
-  font-size: 20px;
-  font-weight: bold;
-  margin: 10px 0;
+.badges{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+    margin-bottom:20px;
+}
+
+.badge{
+    background:#dcfce7;
+    color:#166534;
+    padding:10px 18px;
+    border-radius:30px;
+    font-size:14px;
+    font-weight:bold;
+}
+
+h1{
+    font-size:58px;
+    color:#14532d;
+    margin-bottom:18px;
+}
+
+.price{
+    font-size:48px;
+    color:#16a34a;
+    font-weight:bold;
+    margin-bottom:25px;
+}
+
+.description{
+    line-height:1.9;
+    color:#555;
+    font-size:17px;
+    margin-bottom:35px;
+}
+
+/* FEATURES */
+
+.features{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+    margin-bottom:35px;
+}
+
+.feature-card{
+    background:#f7faf8;
+    padding:22px;
+    border-radius:20px;
+    display:flex;
+    gap:15px;
+    align-items:flex-start;
+}
+
+.feature-card i{
+    color:#16a34a;
+    font-size:28px;
 }
 
 /* QUANTITY */
-.qty-box {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  margin: 15px 0;
+
+.qty-section{
+    background:#f7faf8;
+    padding:28px;
+    border-radius:24px;
+    margin-bottom:30px;
 }
 
-.qty-box button {
-  width: 40px;
-  height: 40px;
-  font-size: 18px;
+.qty-title{
+    font-size:22px;
+    font-weight:bold;
+    margin-bottom:20px;
+    color:#14532d;
+}
+
+.qty-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+}
+
+.qty-box{
+    display:flex;
+    align-items:center;
+    border:2px solid #dbe4dc;
+    border-radius:18px;
+    overflow:hidden;
+    background:white;
+}
+
+.qty-box button{
+    width:60px;
+    height:60px;
+    border:none;
+    background:white;
+    font-size:24px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.qty-box button:hover{
+    background:#14532d;
+    color:white;
+}
+
+.qty-box span{
+    width:80px;
+    text-align:center;
+    font-size:24px;
+    font-weight:bold;
+}
+
+.total{
+    font-size:38px;
+    font-weight:bold;
+    color:#14532d;
 }
 
 /* BUTTONS */
-.btn {
-  display: block;
-  width: 100%;
-  padding: 12px;
-  margin-top: 10px;
-  border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  cursor: pointer;
+
+.buttons{
+    display:flex;
+    gap:18px;
 }
 
-.add { background: #16a34a; color: white; }
-.buy { background: #14532d; color: white; }
-
-/* QUALITY */
-.quality {
-  margin-top: 15px;
-  font-size: 14px;
-  color: #555;
+.btn{
+    flex:1;
+    padding:18px;
+    border:none;
+    border-radius:16px;
+    cursor:pointer;
+    font-size:18px;
+    font-weight:bold;
+    transition:0.3s;
 }
-.cart-icon {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background: white;
-  padding: 8px 12px;
-  border-radius: 20px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-  cursor: pointer;
-  font-weight: bold;
+
+.add-btn{
+    background:linear-gradient(135deg,#16a34a,#14532d);
+    color:white;
+}
+
+.add-btn:hover{
+    transform:translateY(-3px);
+    box-shadow:0 10px 25px rgba(22,163,74,0.3);
+}
+
+.buy-btn{
+    background:#14532d;
+    color:white;
+}
+
+.buy-btn:hover{
+    transform:translateY(-3px);
+}
+
+/* DELIVERY */
+
+.delivery{
+    max-width:1450px;
+    margin:50px auto;
+    background:white;
+    border-radius:30px;
+    padding:45px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:25px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.06);
+}
+
+.delivery-card{
+    text-align:center;
+}
+
+.delivery-card i{
+    font-size:42px;
+    color:#16a34a;
+    margin-bottom:20px;
+}
+
+/* TOAST */
+
+.toast{
+    position:fixed;
+    bottom:30px;
+    right:30px;
+    background:#14532d;
+    color:white;
+    padding:18px 25px;
+    border-radius:16px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.15);
+    animation:slideUp 0.3s ease;
+    z-index:2000;
+}
+
+@keyframes slideUp{
+    from{
+        opacity:0;
+        transform:translateY(80px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
 }
 
 /* MOBILE */
-@media (max-width: 768px) {
-  .container {
-    flex-direction: column;
-  }
+
+@media(max-width:1000px){
+
+    .order-section{
+        grid-template-columns:1fr;
+    }
+
+    .details-side{
+        padding:35px;
+    }
+
+    h1{
+        font-size:40px;
+    }
+
+    .price{
+        font-size:34px;
+    }
+
+    .main-image{
+        height:340px;
+    }
+
+    .buttons{
+        flex-direction:column;
+    }
+
+    .features{
+        grid-template-columns:1fr;
+    }
+
+    .header{
+        padding:18px 20px;
+        flex-direction:column;
+        gap:15px;
+    }
+
+    .qty-row{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
 }
+
 </style>
 </head>
-  <div class="cart-icon" onclick="goToCart()">
-    🛒 <span id="cartCount">0</span>
-  </div>
-  <h2 style="text-align:center;"> Order Product</h2>
+
 <body>
 
-<div class="container">
+<!-- HEADER -->
 
+<div class="header">
 
+<div class="logo">
+🌿 Green Valley Farms
+</div>
 
-  <!-- IMAGE -->
-  <div class="product-img">
-    <img id="productImage">
-  </div>
+<div class="nav-buttons">
 
-  <!-- DETAILS -->
-  <div class="details">
+<a href="index.html" class="nav-btn">
+<i class="fa-solid fa-house"></i>
+Home
+</a>
 
-    <h2 id="productName"></h2>
-    <div class="price" id="productPrice"></div>
+<a href="cart.html"
+class="nav-btn cart-btn">
 
-    <!-- Quantity -->
-    <div class="qty-box"> 
-	<button onclick="changeQty(-1)">➖</button> 
-	<span id="qty">1</span> 
-	<button onclick="changeQty(1)">➕</button> 
-	</div> 
-	<p id="total"></p> 
-	<button class="btn add" onclick="addToCart()">Add to Cart</button> 
-	<button class="btn buy" onclick="buyNow()">Buy Now</button> 
-	<div class="quality"> 
-	🌿 100% Natural Feed <br> 
-	🚫 No Chemicals <br> 
-	🐓 Free Range Farming <br> 
-	🚚 Fresh from Farm 
-	</div>
+<i class="fa-solid fa-cart-shopping"></i>
+Cart
 
-  </div>
+<span class="cart-count"
+id="cartCount">0</span>
+
+</a>
+
+</div>
+
+</div>
+
+<!-- ORDER SECTION -->
+
+<div class="order-section">
+
+<!-- IMAGE SIDE -->
+
+<div class="image-side">
+
+<div class="main-image-container">
+
+<div class="image-tag">
+🔥 Premium Organic Product
+</div>
+
+<img id="productImage"
+class="main-image"
+src="images/chicken-eggs.jpg">
+
+</div>
+
+<div class="thumbnail-row">
+
+<img class="thumb"
+src="images/chicken-eggs.jpg"
+onclick="changeImage(this.src)">
+
+<img class="thumb"
+src="images/farm.jpg"
+onclick="changeImage(this.src)">
+
+<img class="thumb"
+src="images/farm2.jpg"
+onclick="changeImage(this.src)">
+
+<img class="thumb"
+src="images/farm3.jpg"
+onclick="changeImage(this.src)">
+
+</div>
+
+</div>
+
+<!-- DETAILS -->
+
+<div class="details-side">
+
+<div class="badges">
+
+<div class="badge">
+🌿 Organic
+</div>
+
+<div class="badge">
+🚚 Fresh Delivery
+</div>
+
+<div class="badge">
+⭐ Best Seller
+</div>
+
+</div>
+
+<h1 id="productName">
+Chicken Eggs
+</h1>
+
+<div class="price"
+id="productPrice">
+Rs.70
+</div>
+
+<p class="description"
+id="productDesc">
+
+Farm fresh eggs from free-range chickens raised naturally in healthy green environments.
+
+</p>
+
+<!-- FEATURES -->
+
+<div class="features">
+
+<div class="feature-card">
+
+<i class="fa-solid fa-leaf"></i>
+
+<div>
+<h3>100% Organic</h3>
+<p>Chemical free farm products</p>
+</div>
+
+</div>
+
+<div class="feature-card">
+
+<i class="fa-solid fa-ban"></i>
+
+<div>
+<h3>No Antibiotics</h3>
+<p>Healthy & safe farming</p>
+</div>
+
+</div>
+
+<div class="feature-card">
+
+<i class="fa-solid fa-truck"></i>
+
+<div>
+<h3>Fast Delivery</h3>
+<p>Direct from farm to home</p>
+</div>
+
+</div>
+
+<div class="feature-card">
+
+<i class="fa-solid fa-seedling"></i>
+
+<div>
+<h3>Premium Quality</h3>
+<p>Maintained with high standards</p>
+</div>
+
+</div>
+
+</div>
+
+<!-- QUANTITY -->
+
+<div class="qty-section">
+
+<div class="qty-title">
+Select Quantity
+</div>
+
+<div class="qty-row">
+
+<div class="qty-box">
+
+<button onclick="changeQty(-1)">
+−
+</button>
+
+<span id="qty">1</span>
+
+<button onclick="changeQty(1)">
++
+</button>
+
+</div>
+
+<div class="total">
+Rs.<span id="total">70</span>
+</div>
+
+</div>
+
+</div>
+
+<!-- BUTTONS -->
+
+<div class="buttons">
+
+<button class="btn add-btn"
+onclick="addToCart()">
+
+🛒 Add to Cart
+
+</button>
+
+<button class="btn buy-btn"
+onclick="buyNow()">
+
+⚡ Buy Now
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- DELIVERY -->
+
+<div class="delivery">
+
+<div class="delivery-card">
+
+<i class="fa-solid fa-truck-fast"></i>
+
+<h3>Fast Delivery</h3>
+
+<p>
+Delivered fresh within 24 hours
+</p>
+
+</div>
+
+<div class="delivery-card">
+
+<i class="fa-solid fa-temperature-low"></i>
+
+<h3>Safe Packaging</h3>
+
+<p>
+Temperature controlled freshness
+</p>
+
+</div>
+
+<div class="delivery-card">
+
+<i class="fa-solid fa-award"></i>
+
+<h3>Premium Standards</h3>
+
+<p>
+Maintained with best farm quality
+</p>
+
+</div>
+
+<div class="delivery-card">
+
+<i class="fa-solid fa-heart"></i>
+
+<h3>Trusted By Families</h3>
+
+<p>
+5000+ satisfied customers
+</p>
+
+</div>
 
 </div>
 
 <script>
-let product = localStorage.getItem("product");
-let price = Number(localStorage.getItem("price"));
+
+/* IMAGE SWITCH */
+
+function changeImage(src){
+
+    document.getElementById("productImage").src = src;
+
+}
+
+/* PRODUCT DATA */
+
+const data = {
+
+"Chicken Eggs":{
+    price:70,
+    img:"images/chicken-eggs.jpg",
+    desc:"Farm fresh eggs from free-range chickens raised naturally in healthy green environments."
+},
+
+"Duck Eggs":{
+    price:90,
+    img:"images/duckeggs.jpg",
+    desc:"Rich and nutritious duck eggs collected fresh daily from healthy farm ducks."
+},
+
+"Duck":{
+    price:350,
+    img:"images/farm2.jpg",
+    desc:"Healthy ducks raised naturally in chemical-free farm conditions."
+},
+
+"Chicken":{
+    price:250,
+    img:"images/farm3.jpg",
+    desc:"Naturally grown chickens with organic feed and premium care."
+},
+
+"Goat":{
+    price:500,
+    img:"images/farm.jpg",
+    desc:"Strong and healthy farm goats raised organically."
+}
+
+};
+
+let product =
+    localStorage.getItem("product");
+
+if(!product){
+    product = "Chicken Eggs";
+}
+
 let qty = 1;
 
-/* Product images */
-let images = {
-  "Chicken Eggs": "images/chicken-eggs.jpg",
-  "Duck Eggs": "images/duckeggs.jpg",
-  "Duck": "images/farm2.jpg",
-  "Chicken": "images/farm2.jpg",
-  "Goat": "images/farm.jpg"
-};
+const item = data[product];
 
-document.getElementById("productName").innerText = product;
-document.getElementById("productPrice").innerText = "Rs." + price;
-document.getElementById("productImage").src = images[product];
+/* LOAD PRODUCT */
 
-function updateTotal() {
-  document.getElementById("total").innerText =
-    "Total: Rs." + (price * qty);
+document.getElementById("productName")
+.innerText = product;
+
+document.getElementById("productPrice")
+.innerText = "Rs." + item.price;
+
+document.getElementById("productImage")
+.src = item.img;
+
+document.getElementById("productDesc")
+.innerText = item.desc;
+
+/* TOTAL */
+
+function updateTotal(){
+
+    document.getElementById("qty")
+    .innerText = qty;
+
+    document.getElementById("total")
+    .innerText = item.price * qty;
+
 }
 
-function changeQty(val) {
-  qty += val;
-  if (qty < 1) qty = 1;
-  document.getElementById("qty").innerText = qty;
-  updateTotal();
+/* QUANTITY */
+
+function changeQty(val){
+
+    qty += val;
+
+    if(qty < 1){
+        qty = 1;
+    }
+
+    updateTotal();
+
 }
 
-function addToCart() {
+/* CART COUNT */
 
-  let product = localStorage.getItem("product");
-  let price = Number(localStorage.getItem("price"));
-  let qty = Number(document.getElementById("qty").innerText);
+function updateCartCount(){
 
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    let cart =
+        JSON.parse(localStorage.getItem("cart")) || [];
 
-  let existing = cart.find(item => item.product === product);
+    let count = 0;
 
-  if (existing) {
-    existing.qty += qty;
-  } else {
-    cart.push({ product: product, price: price, qty: qty });
-  }
+    cart.forEach(c => {
+        count += c.qty;
+    });
 
-  localStorage.setItem("cart", JSON.stringify(cart));
+    document.getElementById("cartCount")
+    .innerText = count;
 
-  updateCartCount();   // update icon
-
-  console.log("Cart updated:", cart);  // DEBUG
 }
 
-function buyNow() {
-  addToCart();
-  window.location.href = "cart.html";
+/* TOAST */
+
+function showToast(message){
+
+    const toast =
+        document.createElement("div");
+
+    toast.className = "toast";
+
+    toast.innerText = message;
+
+    document.body.appendChild(toast);
+
+    setTimeout(() => {
+        toast.remove();
+    }, 2200);
+
 }
 
-updateTotal();
-</script>
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-  updateCartCount();
-});
-</script>
+/* ADD TO CART */
 
-<script>
-function goToCart() {
-  window.location.href = "cart.html";
-}
-</script>
+function addToCart(){
 
-<script>
+    let cart =
+        JSON.parse(localStorage.getItem("cart")) || [];
 
-function updateCartCount() {
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const existing =
+        cart.find(c => c.product === product);
 
-  let count = cart.reduce((sum, item) => {
-    return sum + Number(item.qty || 0);
-  }, 0);
+    if(existing){
 
-  document.getElementById("cartCount").innerText = count;
-}
+        existing.qty += qty;
 
-</script>
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-let product = localStorage.getItem("product");
-let price = Number(localStorage.getItem("price"));
-let qty = 1;
+    }else{
 
-/* fallback if opened directly */
-if (!product) {
-  product = "Chicken Eggs";
-  price = 70;
+        cart.push({
+            product:product,
+            price:item.price,
+            qty:qty,
+            image:item.img
+        });
+
+    }
+
+    localStorage.setItem(
+        "cart",
+        JSON.stringify(cart)
+    );
+
+    updateCartCount();
+
+    showToast(product + " added to cart");
+
 }
 
-/* product images */
-let images = {
-  "Chicken Eggs": "images/chicken-eggs.jpg",
-  "Duck Eggs": "images/duckeggs.jpg",
-  "Duck": "images/farm2.jpg",
-  "Chicken": "images/farm3.jpg",
-  "Goat": "images/farm.jpg"
-};
+/* BUY NOW */
 
-/* SET VALUES */
-document.getElementById("productName").innerText = product;
-document.getElementById("productPrice").innerText = "Rs." + price;
-document.getElementById("productImage").src = images[product];
+function buyNow(){
 
-/* UPDATE TOTAL */
-function updateTotal() {
-  document.getElementById("total").innerText =
-    "Total: Rs." + (price * qty);
+    addToCart();
+
+    window.location.href = "cart.html";
+
 }
 
-/* BUTTONS MUST BE GLOBAL */
-window.changeQty = function(val) {
-  qty += val;
-  if (qty < 1) qty = 1;
-
-  document.getElementById("qty").innerText = qty;
-  updateTotal();
-};
-
-/* CART */
-window.addToCart = function() {
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-  let existing = cart.find(item => item.product === product);
-
-  if (existing) {
-    existing.qty += qty;
-  } else {
-    cart.push({ product, price, qty });
-  }
-
-  localStorage.setItem("cart", JSON.stringify(cart));
-
-  updateCartCount();   // ✅ IMPORTANT
-  animateCart();       // optional animation
-};
-
-window.buyNow = function() {
-  addToCart();
-  window.location.href = "cart.html";
-};
+/* INIT */
 
 updateTotal();
 
-});
+updateCartCount();
 
 </script>
-<script>
-function updateCartCount() {
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-  if (!Array.isArray(cart) || cart.length === 0) {
-    document.getElementById("cartCount").innerText = 0;
-    return;
-  }
-
-  let count = cart.reduce((sum, item) => sum + Number(item.qty || 0), 0);
-
-  document.getElementById("cartCount").innerText = count;
-}
-</script>
-<script>
-function animateCart() {
-  let icon = document.querySelector(".cart-icon");
-  icon.classList.add("animate");
-
-  setTimeout(() => {
-    icon.classList.remove("animate");
-  }, 200);
-}
-</script>
-<script>
-document.querySelector(".cart-icon").style.background = "#d1fae5";
-
-setTimeout(() => {
-  document.querySelector(".cart-icon").style.background = "white";
-}, 300);
-</script>
-<script>
-window.addEventListener("storage", function () {
-  updateCartCount();
-});
-</script>
-<script>
-function removeItem(index) {
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-  cart.splice(index, 1);
-
-  if (cart.length === 0) {
-    localStorage.removeItem("cart");   // ✅ important
-  } else {
-    localStorage.setItem("cart", JSON.stringify(cart));
-  }
-
-  loadCart();
-  updateCartCount();
-}
-
-function clearCart() {
-  localStorage.removeItem("cart");
-
-  loadCart();
-  updateCartCount();   // ✅ FIX
-}
-</script>
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-  updateCartCount();
-});
-</script>
-<script>
-function loadCart() {
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-  let container = document.getElementById("cartItems");
-  container.innerHTML = "";
-
-  if (cart.length === 0) {
-    container.innerHTML = "<p>Your cart is empty</p>";
-    return;
-  }
-
-  cart.forEach((item, index) => {
-    container.innerHTML += `
-      <div>
-        <p>${item.product} - Rs.${item.price} x ${item.qty}</p>
-        <button onclick="removeItem(${index})">Remove</button>
-      </div>
-    `;
-  });
-}
-</script>
 </body>
 </html>

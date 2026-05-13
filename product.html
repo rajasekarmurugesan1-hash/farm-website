@@ -3,183 +3,795 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Product Details</title>
+
+<title> MMM Green Valley Farms - Premium Product</title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
 <style>
-* { margin:0; padding:0; box-sizing:border-box; }
 
-body {
-  font-family: 'Segoe UI', Arial;
-  background: #f4f6f5;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Segoe UI',sans-serif;
+    background:#f5f7f4;
+    color:#222;
+    overflow-x:hidden;
 }
 
 /* HEADER */
-.header {
-  background: linear-gradient(90deg,#14532d,#166534);
-  color:white;
-  padding:15px;
-  text-align:center;
+
+.header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    background:rgba(20,83,45,0.95);
+    backdrop-filter:blur(10px);
+    padding:18px 50px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 4px 18px rgba(0,0,0,0.08);
 }
 
-/* CARD */
-.container {
-  max-width: 900px;
-  margin: 30px auto;
-  background: white;
-  padding: 25px;
-  border-radius: 15px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+.logo{
+    color:white;
+    font-size:30px;
+    font-weight:700;
 }
 
-/* IMAGE */
-img {
-  width: 100%;
-  height: 420px;
-  object-fit: contain;
-  background: #f5f5f5;
-  border-radius: 16px;
-  padding: 10px;
+.nav-buttons{
+    display:flex;
+    gap:15px;
 }
 
-@media(max-width:768px){
+.nav-btn{
+    text-decoration:none;
+    color:white;
+    background:rgba(255,255,255,0.12);
+    padding:12px 20px;
+    border-radius:14px;
+    transition:0.3s;
+    font-weight:600;
+}
 
-  .product-image img{
-    height: 280px;
-  }
+.nav-btn:hover{
+    background:white;
+    color:#14532d;
+}
+
+/* MAIN PRODUCT */
+
+.product-section{
+    max-width:1400px;
+    margin:50px auto;
+    background:white;
+    border-radius:35px;
+    overflow:hidden;
+    box-shadow:0 20px 50px rgba(0,0,0,0.08);
+    display:grid;
+    grid-template-columns:1fr 1fr;
+}
+
+/* IMAGE SIDE */
+
+.image-side{
+    background:linear-gradient(135deg,#eef8f0,#f9faf9);
+    padding:40px;
+}
+
+.main-image-container{
+    background:white;
+    border-radius:28px;
+    padding:25px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.08);
+    margin-bottom:25px;
+}
+
+.main-image{
+    width:100%;
+    height:500px;
+    object-fit:contain;
+    transition:0.3s;
+}
+
+.thumbnail-row{
+    display:flex;
+    gap:15px;
+}
+
+.thumb{
+    width:95px;
+    height:95px;
+    object-fit:cover;
+    border-radius:18px;
+    cursor:pointer;
+    border:3px solid transparent;
+    transition:0.3s;
+    background:white;
+    padding:5px;
+}
+
+.thumb:hover{
+    transform:translateY(-4px);
+    border-color:#16a34a;
+}
+
+/* DETAILS */
+
+.details-side{
+    padding:60px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+
+.badges{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+    margin-bottom:20px;
+}
+
+.badge{
+    background:#dcfce7;
+    color:#166534;
+    padding:10px 18px;
+    border-radius:30px;
+    font-size:14px;
+    font-weight:bold;
+}
+
+h1{
+    font-size:58px;
+    color:#14532d;
+    margin-bottom:18px;
+}
+
+.price{
+    font-size:46px;
+    color:#16a34a;
+    font-weight:bold;
+    margin-bottom:25px;
+}
+
+.description{
+    line-height:1.9;
+    color:#555;
+    font-size:17px;
+    margin-bottom:35px;
+}
+
+/* FEATURE GRID */
+
+.features{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+    margin-bottom:40px;
+}
+
+.feature-card{
+    background:#f7faf8;
+    padding:22px;
+    border-radius:20px;
+    display:flex;
+    gap:15px;
+    align-items:flex-start;
+    transition:0.3s;
+}
+
+.feature-card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 10px 25px rgba(0,0,0,0.08);
+}
+
+.feature-card i{
+    color:#16a34a;
+    font-size:28px;
+}
+
+/* BUTTONS */
+
+.buttons{
+    display:flex;
+    gap:18px;
+}
+
+.btn{
+    flex:1;
+    padding:18px;
+    border:none;
+    border-radius:16px;
+    cursor:pointer;
+    font-size:18px;
+    font-weight:bold;
+    transition:0.3s;
+}
+
+.order-btn{
+    background:linear-gradient(135deg,#16a34a,#14532d);
+    color:white;
+}
+
+.order-btn:hover{
+    transform:translateY(-3px);
+    box-shadow:0 10px 25px rgba(22,163,74,0.3);
+}
+
+.home-btn{
+    background:white;
+    border:2px solid #14532d;
+    color:#14532d;
+}
+
+.home-btn:hover{
+    background:#14532d;
+    color:white;
+}
+
+/* STORY BANNER */
+
+.story{
+    max-width:1400px;
+    margin:40px auto;
+    border-radius:30px;
+    overflow:hidden;
+    position:relative;
+}
+
+.story img{
+    width:100%;
+    height:400px;
+    object-fit:cover;
+}
+
+.story-overlay{
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,0.45);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    color:white;
+    text-align:center;
+    padding:30px;
+}
+
+.story-overlay h2{
+    font-size:52px;
+    margin-bottom:20px;
+}
+
+.story-overlay p{
+    max-width:800px;
+    line-height:1.8;
+    font-size:18px;
+}
+
+/* REVIEWS */
+
+.reviews{
+    max-width:1400px;
+    margin:50px auto;
+}
+
+.section-title{
+    text-align:center;
+    font-size:42px;
+    color:#14532d;
+    margin-bottom:40px;
+}
+
+.review-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+    gap:25px;
+}
+
+.review-card{
+    background:white;
+    padding:30px;
+    border-radius:24px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.06);
+}
+
+.stars{
+    color:#facc15;
+    margin-bottom:15px;
+    font-size:20px;
+}
+
+.review-card p{
+    color:#555;
+    line-height:1.8;
+    margin-bottom:20px;
+}
+
+.customer{
+    font-weight:bold;
+    color:#14532d;
+}
+
+/* DELIVERY */
+
+.delivery{
+    max-width:1400px;
+    margin:50px auto;
+    background:white;
+    border-radius:30px;
+    padding:45px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:25px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.06);
+}
+
+.delivery-card{
+    text-align:center;
+}
+
+.delivery-card i{
+    font-size:42px;
+    color:#16a34a;
+    margin-bottom:20px;
+}
+
+/* MOBILE */
+
+@media(max-width:1000px){
+
+    .product-section{
+        grid-template-columns:1fr;
+    }
+
+    .details-side{
+        padding:35px;
+    }
+
+    h1{
+        font-size:40px;
+    }
+
+    .price{
+        font-size:34px;
+    }
+
+    .main-image{
+        height:350px;
+    }
+
+    .buttons{
+        flex-direction:column;
+    }
+
+    .features{
+        grid-template-columns:1fr;
+    }
+
+    .story-overlay h2{
+        font-size:34px;
+    }
+
+    .header{
+        padding:18px 20px;
+        flex-direction:column;
+        gap:15px;
+    }
 
 }
 
-/* TEXT */
-h2 {
-  text-align:center;
-  color:#14532d;
-}
-
-p {
-  margin-top:15px;
-  line-height:1.6;
-  color:#555;
-  text-align:center;
-}
-
-/* BUTTON */
-button {
-  width:100%;
-  padding:14px;
-  background:#16a34a;
-  color:white;
-  border:none;
-  border-radius:8px;
-  margin-top:20px;
-  cursor:pointer;
-  font-size:16px;
-}
-
-button:hover {
-  background:#14532d;
-}
-
-/* EMPTY STATE */
-.empty {
-  text-align:center;
-  margin-top:30px;
-  color:#777;
-}
 </style>
 </head>
 
 <body>
 
+<!-- HEADER -->
+
 <div class="header">
-  <h2>Farm Product Details</h2>
+
+<div class="logo">
+🌿 MMM Green Valley Farms
 </div>
 
-<div class="container">
+<div class="nav-buttons">
 
-  <h2 id="title">Loading...</h2>
-  <p id="description"></p>
+<a href="index.html" class="nav-btn">
+<i class="fa-solid fa-house"></i>
+Home
+</a>
 
-  <img id="image" src="">
+<a href="cart.html" class="nav-btn">
+<i class="fa-solid fa-cart-shopping"></i>
+Cart
+</a>
 
-  <button id="orderBtn" onclick="orderNow()">🛒 Order Now</button>
+</div>
 
-  <div id="emptyState" class="empty" style="display:none;">
-    Please go back and select a product from the homepage.
-  </div>
+</div>
+
+<!-- PRODUCT -->
+
+<div class="product-section">
+
+<!-- IMAGE SIDE -->
+
+<div class="image-side">
+
+<div class="main-image-container">
+
+<img id="mainImage"
+class="main-image"
+src="images/chicken-eggs.jpg">
+
+</div>
+
+<div class="thumbnail-row">
+
+<img class="thumb"
+src="images/chicken-eggs.jpg"
+onclick="changeImage(this.src)">
+
+<img class="thumb"
+src="images/farm.jpg"
+onclick="changeImage(this.src)">
+
+<img class="thumb"
+src="images/farm2.jpg"
+onclick="changeImage(this.src)">
+
+<img class="thumb"
+src="images/farm3.jpg"
+onclick="changeImage(this.src)">
+
+</div>
+
+</div>
+
+<!-- DETAILS -->
+
+<div class="details-side">
+
+<div class="badges">
+
+<div class="badge">
+🔥 Best Seller
+</div>
+
+<div class="badge">
+🌿 Organic
+</div>
+
+<div class="badge">
+🚚 Fresh Delivery
+</div>
+
+</div>
+
+<h1 id="title">
+Chicken Eggs
+</h1>
+
+<div class="price" id="price">
+Rs.70
+</div>
+
+<p class="description" id="description">
+
+Farm fresh eggs from free-range chickens raised naturally in healthy green environments. Rich in nutrition, protein, and freshness directly from Green Valley Farms.
+
+</p>
+
+<!-- FEATURES -->
+
+<div class="features">
+
+<div class="feature-card">
+
+<i class="fa-solid fa-leaf"></i>
+
+<div>
+<h3>100% Organic</h3>
+<p>Chemical free farm products</p>
+</div>
+
+</div>
+
+<div class="feature-card">
+
+<i class="fa-solid fa-ban"></i>
+
+<div>
+<h3>No Antibiotics</h3>
+<p>Safe & healthy farming</p>
+</div>
+
+</div>
+
+<div class="feature-card">
+
+<i class="fa-solid fa-truck"></i>
+
+<div>
+<h3>Fresh Delivery</h3>
+<p>Direct from farm to home</p>
+</div>
+
+</div>
+
+<div class="feature-card">
+
+<i class="fa-solid fa-seedling"></i>
+
+<div>
+<h3>Premium Quality</h3>
+<p>Top quality standards</p>
+</div>
+
+</div>
+
+</div>
+
+<!-- BUTTONS -->
+
+<div class="buttons">
+
+<button class="btn order-btn"
+onclick="orderNow()">
+
+🛒 Order Now
+
+</button>
+
+<button class="btn home-btn"
+onclick="goHome()">
+
+🏠 Back Home
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- FARM STORY -->
+
+<div class="story">
+
+<img src="images/farm.jpg">
+
+<div class="story-overlay">
+
+<h2>
+Raised Naturally With Care
+</h2>
+
+<p>
+
+At Green Valley Farms, every product is raised in clean natural surroundings with ethical farming methods, healthy feed, and sustainable practices that ensure freshness and superior quality.
+
+</p>
+
+</div>
+
+</div>
+
+<!-- REVIEWS -->
+
+<div class="reviews">
+
+<h2 class="section-title">
+What Customers Say
+</h2>
+
+<div class="review-grid">
+
+<div class="review-card">
+
+<div class="stars">
+★★★★★
+</div>
+
+<p>
+The freshest farm eggs I’ve ever purchased. The quality and taste are outstanding.
+</p>
+
+<div class="customer">
+— Priya R
+</div>
+
+</div>
+
+<div class="review-card">
+
+<div class="stars">
+★★★★★
+</div>
+
+<p>
+Premium organic products with excellent packaging and quick delivery.
+</p>
+
+<div class="customer">
+— Arjun K
+</div>
+
+</div>
+
+<div class="review-card">
+
+<div class="stars">
+★★★★★
+</div>
+
+<p>
+You can genuinely feel the farm freshness. Highly recommended.
+</p>
+
+<div class="customer">
+— Meera S
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- DELIVERY -->
+
+<div class="delivery">
+
+<div class="delivery-card">
+
+<i class="fa-solid fa-truck-fast"></i>
+
+<h3>Fast Delivery</h3>
+
+<p>
+Delivered fresh within 24 hours
+</p>
+
+</div>
+
+<div class="delivery-card">
+
+<i class="fa-solid fa-temperature-low"></i>
+
+<h3>Safe Packaging</h3>
+
+<p>
+Temperature controlled handling
+</p>
+
+</div>
+
+<div class="delivery-card">
+
+<i class="fa-solid fa-award"></i>
+
+<h3>Premium Standards</h3>
+
+<p>
+Maintained with high farm quality
+</p>
+
+</div>
+
+<div class="delivery-card">
+
+<i class="fa-solid fa-heart"></i>
+
+<h3>Trusted By Families</h3>
+
+<p>
+5000+ happy customers
+</p>
+
+</div>
 
 </div>
 
 <script>
-// GET PRODUCT FROM URL
-const params = new URLSearchParams(window.location.search);
-const item = params.get("item");
+
+function changeImage(src){
+
+    document.getElementById("mainImage").src = src;
+
+}
 
 /* PRODUCT DATA */
+
+const params = new URLSearchParams(window.location.search);
+
+const item = params.get("item");
+
 const data = {
-  "Chicken Eggs": {
-    name: "Chicken Eggs",
-    price: 70,
-    desc: "Farm fresh eggs from free-range chickens. High protein and chemical-free. The Everyday Classic (Chicken Eggs)Our hens roam free, foraging on fresh greens and sunshine. The result? A vibrant, sun-orange yolk and a clean, rich flavor that store-bought eggs can’t match. Perfect for your morning scramble or the family’s favorite breakfast.",
-    img: "images/chicken-eggs.jpg"
-  },
-  "Duck Eggs": {
-    name: "Duck Eggs",
-    price: 90,
-    desc: "From Our Pastures to Your Plate: Experience the Difference of Farm-Fresh Eggs. Discover the rich, golden yolks and superior nutrition of our pasture-raised chicken and specialty duck eggs. Hand-collected daily, delivered with care.",
-    img: "images/duckeggs.jpg"
-	
-  },
-  "Duck": {
-    name: "Duck",
-    price: 350,
-    desc: "Healthy ducks raised in natural environment.",
-    img: "images/farm2.jpg"
-  },
-  "Chicken": {
-    name: "Chicken",
-    price: 250,
-    desc: "Naturally grown chickens, no chemicals.",
-    img: "images/farm3.jpg"
-  },
-  "Goat": {
-    name: "Goat",
-    price: 500,
-    desc: "Strong and healthy goats raised organically.",
-    img: "images/farm.jpg"
-  }
+
+"Chicken Eggs":{
+    name:"Chicken Eggs",
+    price:70,
+    desc:"Farm fresh eggs from free-range chickens raised naturally in healthy green environments. Rich in nutrition and freshness.",
+    img:"images/chicken-eggs.jpg"
+},
+
+"Duck Eggs":{
+    name:"Duck Eggs",
+    price:90,
+    desc:"Rich and nutritious duck eggs collected fresh daily from healthy farm ducks raised naturally.",
+    img:"images/duckeggs.jpg"
+},
+
+"Duck":{
+    name:"Duck",
+    price:350,
+    desc:"Healthy ducks raised in clean natural farm conditions.",
+    img:"images/farm2.jpg"
+},
+
+"Chicken":{
+    name:"Chicken",
+    price:250,
+    desc:"Naturally grown chickens with organic feed and premium care.",
+    img:"images/farm3.jpg"
+},
+
+"Goat":{
+    name:"Goat",
+    price:500,
+    desc:"Strong and healthy farm goats raised naturally.",
+    img:"images/farm.jpg"
+}
+
 };
 
 const product = data[item];
 
-/* LOAD PRODUCT */
-if (product) {
-  document.getElementById("title").innerText = product.name;
-  document.getElementById("description").innerText = product.desc;
-  document.getElementById("image").src = product.img;
-} else {
-  // HANDLE NO PRODUCT CASE
-  document.getElementById("title").innerText = "Product Not Found";
-  document.getElementById("description").innerText = "";
-  document.getElementById("image").style.display = "none";
-  document.getElementById("orderBtn").style.display = "none";
-  document.getElementById("emptyState").style.display = "block";
+if(product){
+
+    document.getElementById("title").innerText =
+        product.name;
+
+    document.getElementById("price").innerText =
+        "Rs." + product.price;
+
+    document.getElementById("description").innerText =
+        product.desc;
+
+    document.getElementById("mainImage").src =
+        product.img;
+
 }
 
-/* ORDER BUTTON */
-function orderNow() {
-  if (!product) {
-    alert("No product selected!");
-    return;
-  }
+function orderNow(){
 
-  localStorage.setItem("product", product.name);
-  localStorage.setItem("price", product.price);
+    if(!product){
+        alert("No product selected");
+        return;
+    }
 
-  window.location.href = "order.html";
+    localStorage.setItem("product",
+        product.name);
+
+    window.location.href = "order.html";
+
 }
+
+function goHome(){
+
+    window.location.href = "index.html";
+
+}
+
 </script>
 
 </body>
 </html>
-
-

@@ -472,6 +472,67 @@ footer {
   padding: 25px;
 }
 
+/* HEADER */
+header{
+  position:relative;
+  background:linear-gradient(90deg,#14532d,#166534);
+  color:white;
+  padding:18px 60px;
+  text-align:center;
+}
+/* LOGO + TITLE */
+.logo-section{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:22px;
+}
+
+/* LARGE PREMIUM LOGO */
+.farm-logo{
+  width:140px;
+  height:auto;
+  object-fit:contain;
+  display:block;
+
+  transform: scale(2.1);
+  transform-origin:center;
+
+  margin-top:+4px;
+  margin-bottom:-8px;
+}
+.logo-section{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:20px;
+}
+
+/* TITLE */
+.title{
+  font-size:42px;
+  font-weight:800;
+  margin:0;
+}
+
+.subtitle{
+  margin-top:8px;
+  font-size:18px;
+  opacity:0.95;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+
+  .farm-logo{
+    width:95px;
+  }
+
+  .title{
+    font-size:24px;
+  }
+
+}
 
 html {
   scroll-behavior: smooth;
@@ -496,8 +557,19 @@ function closeMenu() {
 <header>
   <span class="menu-icon" onclick="openMenu()">☰</span>
 
-  <h1 class="title">MMM Green Valley Farm</h1>
-  <p class="subtitle">Fresh Veggies • Fresh Eggs • Ducks • Chicken • Goats</p>
+ <div class="logo-section">
+
+  <img src="images/logo.jpg" class="farm-logo">
+
+  <div>
+    <h1 class="title">MMM Green Valley Farm</h1>
+
+    <p class="subtitle">
+      Fresh Veggies • Fresh Eggs • Ducks • Chicken • Goats
+    </p>
+  </div>
+
+</div>
 
   <div class="cart-icon" onclick="goToCart()">
     🛒 <span id="cartCount">0</span>
