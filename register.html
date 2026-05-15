@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Create Account - MMM Green Valley Farm</title>
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:'Segoe UI', Arial, sans-serif;
+
+  background:
+    linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)),
+    url('images/farm-bg.jpg');
+
+  background-size:cover;
+  background-position:center;
+  background-attachment:fixed;
+
+  min-height:100vh;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  padding:20px;
+}
+
+/* CARD */
+.register-container{
+  width:100%;
+  max-width:460px;
+
+  background:rgba(255,255,255,0.96);
+
+  backdrop-filter:blur(10px);
+
+  border-radius:22px;
+
+  padding:40px 35px;
+
+  box-shadow:0 12px 40px rgba(0,0,0,0.25);
+}
+
+/* TITLE */
+.logo{
+  text-align:center;
+  font-size:46px;
+  margin-bottom:10px;
+}
+
+h1{
+  text-align:center;
+  color:#14532d;
+  margin-bottom:10px;
+  font-size:30px;
+}
+
+.subtitle{
+  text-align:center;
+  color:#666;
+  margin-bottom:30px;
+  font-size:14px;
+}
+
+/* INPUT GROUP */
+.input-group{
+  margin-bottom:18px;
+}
+
+.input-group label{
+  display:block;
+  margin-bottom:8px;
+  font-weight:600;
+  color:#333;
+}
+
+.input-group input{
+  width:100%;
+  padding:14px;
+
+  border:1px solid #dcdcdc;
+
+  border-radius:12px;
+
+  font-size:15px;
+
+  transition:0.3s;
+}
+
+.input-group input:focus{
+  border-color:#16a34a;
+  outline:none;
+
+  box-shadow:0 0 0 4px rgba(22,163,74,0.15);
+}
+
+/* PHONE FIELD */
+.phone-box{
+  display:flex;
+  align-items:center;
+}
+
+.country-code{
+  background:#f3f4f6;
+  padding:14px 16px;
+  border-radius:12px 0 0 12px;
+  border:1px solid #dcdcdc;
+  border-right:none;
+  font-weight:600;
+}
+
+.phone-box input{
+  border-radius:0 12px 12px 0;
+}
+
+/* BUTTON */
+.register-btn{
+  width:100%;
+
+  padding:15px;
+
+  border:none;
+
+  border-radius:14px;
+
+  background:linear-gradient(90deg,#16a34a,#15803d);
+
+  color:white;
+
+  font-size:16px;
+  font-weight:700;
+
+  cursor:pointer;
+
+  transition:0.3s;
+
+  margin-top:10px;
+}
+
+.register-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 10px 24px rgba(22,163,74,0.3);
+}
+
+/* LOGIN LINK */
+.login-link{
+  margin-top:22px;
+  text-align:center;
+  color:#555;
+  font-size:14px;
+}
+
+.login-link a{
+  color:#16a34a;
+  text-decoration:none;
+  font-weight:700;
+}
+
+.login-link a:hover{
+  text-decoration:underline;
+}
+
+/* SUCCESS */
+.success-message{
+  display:none;
+
+  margin-top:20px;
+
+  background:#dcfce7;
+  color:#166534;
+
+  padding:14px;
+
+  border-radius:12px;
+
+  text-align:center;
+
+  font-weight:600;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+
+  .register-container{
+    padding:30px 22px;
+  }
+
+  h1{
+    font-size:24px;
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="register-container">
+
+  <div class="logo">🌿</div>
+
+  <h1>Create Account</h1>
+
+  <p class="subtitle">
+    Join MMM Green Valley Farm for fresh farm products
+  </p>
+
+  <!-- NAME -->
+  <div class="input-group">
+    <label>Full Name</label>
+
+    <input
+      type="text"
+      id="name"
+      placeholder="Enter your full name"
+    >
+  </div>
+
+  <!-- EMAIL -->
+  <div class="input-group">
+    <label>Email Address</label>
+
+    <input
+      type="email"
+      id="email"
+      placeholder="Enter your email"
+    >
+  </div>
+
+  <!-- PHONE -->
+  <div class="input-group">
+
+    <label>Mobile Number</label>
+
+    <div class="phone-box">
+
+      <div class="country-code">
+        +91
+      </div>
+
+      <input
+        type="tel"
+        id="phone"
+        placeholder="10-digit mobile number"
+        maxlength="10"
+        inputmode="numeric"
+        pattern="[0-9]*"
+      >
+
+    </div>
+
+  </div>
+
+  <!-- PASSWORD -->
+  <div class="input-group">
+    <label>Password</label>
+
+    <input
+      type="password"
+      id="password"
+      placeholder="Create password"
+    >
+  </div>
+
+  <!-- CONFIRM PASSWORD -->
+  <div class="input-group">
+    <label>Confirm Password</label>
+
+    <input
+      type="password"
+      id="confirmPassword"
+      placeholder="Confirm password"
+    >
+  </div>
+
+  <!-- BUTTON -->
+  <button class="register-btn" onclick="registerUser()">
+    Create Account
+  </button>
+
+  <!-- SUCCESS -->
+  <div class="success-message" id="successMessage">
+    ✅ Account created successfully!
+  </div>
+
+  <!-- LOGIN -->
+  <div class="login-link">
+
+    Already have an account?
+
+    <a href="login.html">
+      Sign In
+    </a>
+
+  </div>
+
+</div>
+
+<script>
+
+/* ONLY NUMBERS FOR PHONE */
+document.getElementById("phone").addEventListener("input", function () {
+  this.value = this.value.replace(/\D/g, '');
+});
+
+/* REGISTER */
+function registerUser(){
+
+  let name =
+    document.getElementById("name").value.trim();
+
+  let email =
+    document.getElementById("email").value.trim();
+
+  let phone =
+    document.getElementById("phone").value.trim();
+
+  let password =
+    document.getElementById("password").value;
+
+  let confirmPassword =
+    document.getElementById("confirmPassword").value;
+
+  /* VALIDATION */
+  if(!name || !email || !phone || !password || !confirmPassword){
+
+    alert("Please fill all fields");
+    return;
+  }
+
+  if(phone.length !== 10){
+
+    alert("Enter valid 10-digit mobile number");
+    return;
+  }
+
+  if(password !== confirmPassword){
+
+    alert("Passwords do not match");
+    return;
+  }
+
+  /* USERS */
+  let users =
+    JSON.parse(localStorage.getItem("users")) || [];
+
+  /* EMAIL EXISTS */
+  let existingUser =
+    users.find(user => user.email === email);
+
+  if(existingUser){
+
+    alert("Account already exists with this email");
+    return;
+  }
+
+  /* SAVE USER */
+  let newUser = {
+
+    name,
+    email,
+    phone,
+    password
+
+  };
+
+  users.push(newUser);
+
+  localStorage.setItem(
+    "users",
+    JSON.stringify(users)
+  );
+
+  /* AUTO LOGIN */
+  localStorage.setItem(
+    "loggedInUser",
+    JSON.stringify(newUser)
+  );
+
+  /* SUCCESS UI */
+  document.getElementById("successMessage").style.display = "block";
+
+  /* REDIRECT */
+  setTimeout(() => {
+
+    window.location.href = "index.html";
+
+  }, 1800);
+
+}
+
+</script>
+
+</body>
+</html>

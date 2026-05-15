@@ -533,7 +533,73 @@ header{
   }
 
 }
+/* USER ACTIONS */
+.user-actions{
+  position:absolute;
+  top:15px;
+  right:20px;
 
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+
+/* SIGN IN BUTTON */
+.login-btn{
+  border:none;
+  padding:10px 20px;
+  border-radius:10px;
+  cursor:pointer;
+
+  font-size:15px;
+  font-weight:600;
+
+  background:white;
+  color:#14532d;
+
+  transition:0.3s;
+}
+
+.login-btn:hover{
+  background:#f0fdf4;
+  transform:translateY(-2px);
+}
+
+/* NEW USER LINK */
+.new-user-link{
+  margin-top:6px;
+  font-size:13px;
+  color:white;
+}
+
+.new-user-link a{
+  color:#bbf7d0;
+  text-decoration:none;
+  font-weight:600;
+}
+
+.new-user-link a:hover{
+  text-decoration:underline;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+
+  .user-actions{
+    top:12px;
+    right:12px;
+  }
+
+  .login-btn{
+    padding:8px 14px;
+    font-size:13px;
+  }
+
+  .new-user-link{
+    font-size:11px;
+  }
+
+}
 html {
   scroll-behavior: smooth;
 }
@@ -570,10 +636,24 @@ function closeMenu() {
   </div>
 
 </div>
+<div class="user-actions">
 
-  <div class="cart-icon" onclick="goToCart()">
-    🛒 <span id="cartCount">0</span>
+  <button onclick="goToLogin()" class="login-btn">
+    Sign In
+  </button>
+
+  <div class="new-user-link">
+
+    New User?
+
+    <a href="register.html">
+      Create Account
+    </a>
+
   </div>
+
+</div>
+
 </header>
 
 <div id="overlay" onclick="closeMenu()" style="
@@ -857,6 +937,17 @@ window.addEventListener("pageshow", function () {
 function openProduct(name) {
   window.location.href = "product.html?item=" + encodeURIComponent(name);
 }
+</script>
+<script>
+
+function goToLogin(){
+  window.location.href = "login.html";
+}
+
+function goToRegister(){
+  window.location.href = "register.html";
+}
+
 </script>
 </body>
 </html>
